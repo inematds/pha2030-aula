@@ -429,31 +429,49 @@ function renderModulePage(trail, module) {
   const nextModule = trail.modules[moduleIndex + 1];
 
   const sections = module.topics
-    .map(
-      (item, index) => `
+    .map((item, index) => {
+      const detail = buildTopicDetail(trail, module, item, index);
+      return `
       <section id="topico-${index + 1}" class="mb-16">
         <div class="flex items-start gap-4 mb-6">
           <span class="flex items-center justify-center w-12 h-12 rounded-full ${color.bg} ${color.text} font-bold text-xl">${index + 1}</span>
           <div>
             <h2 class="text-2xl font-bold mb-2">${item.title}</h2>
-            <p class="text-neutral-400">${item.subtitle}. ${item.what}</p>
+            <p class="text-neutral-400">${detail.opening}</p>
           </div>
         </div>
 
         <div class="space-y-6">
           <div class="rounded-2xl border ${color.border} bg-gradient-to-br ${color.grad} to-transparent p-6">
             <h3 class="text-lg font-semibold ${color.text} mb-2">Conceito principal</h3>
-            <p class="text-neutral-300">${item.what}</p>
+            <p class="text-neutral-300 mb-4">${detail.core[0]}</p>
+            <p class="text-neutral-300">${detail.core[1]}</p>
           </div>
 
           <div class="rounded-2xl border border-blue-500/30 bg-blue-500/10 p-6">
-            <h3 class="text-lg font-semibold text-blue-400 mb-2">Leitura de contexto</h3>
-            <p class="text-neutral-300">${item.why}</p>
+            <h3 class="text-lg font-semibold text-blue-400 mb-2">Leitura aprofundada</h3>
+            <p class="text-neutral-300 mb-4">${detail.context[0]}</p>
+            <p class="text-neutral-300">${detail.context[1]}</p>
           </div>
 
           <div class="rounded-2xl border border-primary/40 bg-primary/10 p-6">
-            <h3 class="text-lg font-semibold text-primary mb-2">Dica pratica</h3>
-            <p class="text-neutral-300">Use este topico para orientar uma conversa real, uma aula, um workshop ou uma proposta. A pergunta central aqui e: como transformar teoria em decisao melhor no contexto imediato?</p>
+            <h3 class="text-lg font-semibold text-primary mb-2">Exemplo orientado</h3>
+            <p class="text-neutral-300 mb-4">${detail.example[0]}</p>
+            <p class="text-neutral-300">${detail.example[1]}</p>
+          </div>
+
+          <div class="rounded-2xl border border-dark-600 bg-dark-800 p-6">
+            <h3 class="text-lg font-semibold mb-3">Como ensinar ou aplicar este topico</h3>
+            <div class="space-y-4 text-neutral-300">
+              ${detail.steps.map((step, stepIndex) => `<div><span class="${color.text} font-semibold">${stepIndex + 1}.</span> ${step}</div>`).join('')}
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-dark-600 bg-dark-800 p-6">
+            <h3 class="text-lg font-semibold mb-3">Explicacao detalhada</h3>
+            <div class="space-y-4 text-neutral-300">
+              ${detail.deepDive.map((paragraph) => `<p>${paragraph}</p>`).join('')}
+            </div>
           </div>
 
           <div class="grid md:grid-cols-2 gap-6">
@@ -468,21 +486,27 @@ function renderModulePage(trail, module) {
             <div class="rounded-2xl border border-red-500/30 bg-red-500/10 p-6">
               <h3 class="text-lg font-semibold text-red-400 mb-3">Evitar</h3>
               <ul class="space-y-2 text-neutral-300">
-                <li>Explicar o tema de forma abstrata e distante.</li>
-                <li>Confundir sofisticacao com utilidade real.</li>
-                <li>Encerrar sem criterio ou direcao.</li>
+                ${detail.avoid.map((itemText) => `<li>${itemText}</li>`).join('')}
               </ul>
             </div>
           </div>
 
           <div class="rounded-2xl border border-dark-600 bg-dark-800 p-6">
-            <h3 class="text-lg font-semibold mb-3">Conceitos-chave</h3>
-            <p class="text-neutral-300">${item.key}</p>
+            <h3 class="text-lg font-semibold mb-3">Perguntas de reflexao</h3>
+            <div class="space-y-3 text-neutral-300">
+              ${detail.reflection.map((question) => `<p>${question}</p>`).join('')}
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-dark-600 bg-dark-800 p-6">
+            <h3 class="text-lg font-semibold mb-3">Conceitos-chave para memorizar</h3>
+            <p class="text-neutral-300 mb-4">${item.key}</p>
+            <p class="text-neutral-300">${detail.closing}</p>
           </div>
         </div>
       </section>
-    `
-    )
+    `;
+    })
     .join('');
 
   return pageShell({
@@ -535,6 +559,74 @@ function renderModulePage(trail, module) {
       </main>
     `,
   });
+}
+
+function buildTopicDetail(trail, module, item, index) {
+  const keywords = item.key.split(',').map((value) => value.trim()).filter(Boolean);
+  const subject = topicApplicationSubject(trail);
+  const opening = `${item.subtitle}. ${item.what} Neste modulo, o foco e transformar esse conceito em criterio pratico para ${subject}.`;
+
+  const core = [
+    `${item.what} Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.`,
+    `Quando o aluno entende ${item.title.toLowerCase()} com profundidade, ele deixa de repetir frases de efeito e passa a enxergar onde esse assunto aparece no cotidiano de pessoas, equipes e liderancas.`,
+  ];
+
+  const context = [
+    `${item.why} O erro mais comum aqui e tratar o topico como algo teorico demais ou generico demais. No PHA 2030, cada assunto precisa ser conectado a uma dor reconhecivel, a uma conversa real ou a um movimento de maturidade.`,
+    `Na pratica, este ponto influencia a forma como uma sessao e preparada, como uma lideranca percebe valor e como uma equipe traduz interesse inicial em uso consistente. Por isso, a leitura de contexto precisa ser mais explicativa do que apenas inspiracional.`,
+  ];
+
+  const example = [
+    topicExampleLine(trail, module, item, subject),
+    `Depois do exemplo, o papel do facilitador e explicitar o raciocinio: qual era o problema inicial, por que esse topico ajudou a organizar melhor a situacao e que proximo passo concreto passa a fazer sentido a partir daqui.`,
+  ];
+
+  const steps = [
+    `Comece definindo o problema em linguagem simples, sem jargao tecnico e sem correr para ferramenta. O aluno precisa primeiro reconhecer a situacao antes de admirar a solucao.`,
+    `Mostre como ${item.title.toLowerCase()} altera a leitura do caso. Explique o antes, o durante e o depois, deixando claro o ganho de clareza, velocidade, criterio ou autonomia.`,
+    `Feche com uma transferencia direta para o contexto do aluno: qual tarefa, reuniao, discovery, workshop ou conversa comercial pode ser melhor conduzida usando este raciocinio.`,
+  ];
+
+  const deepDive = [
+    `Se este topico fosse tratado como um capitulo de livro, a primeira tarefa seria desmontar a superficialidade. ${item.title} nao deve aparecer como slogan. Ele precisa ser mostrado como uma lente que ajuda a interpretar o momento atual do mercado, o comportamento das pessoas e as decisoes que fazem uma entrega gerar ou nao gerar transformacao real.`,
+    `O segundo passo e aprofundar a implicacao pratica. Em muitos contextos, a equipe ja ouviu falar sobre o assunto, mas ainda nao o converteu em rotina, criterio ou linguagem compartilhada. E por isso que o PHA 2030 insiste tanto em explicacao detalhada: uma organizacao so muda de patamar quando consegue nomear melhor o problema, reconhecer melhor a oportunidade e agir de modo mais intencional.`,
+    `Tambem e importante mostrar tensao e limite. ${item.title} nao resolve tudo sozinho. Ele ganha forca quando entra no desenho maior do modulo ${module.id}, conversa com os outros topicos da trilha ${trail.id} e ajuda a deslocar o aluno de curiosidade para capacidade. Essa costura entre capitulos e o que faz o curso parecer uma obra completa, e nao apenas uma colecao de slides expandidos.`,
+    `Por fim, esse assunto precisa terminar com clareza operacional. O aluno deve sair sabendo como observar ${keywords.slice(0, 3).join(', ')}, como explicar isso para outra pessoa e como usar essa leitura para melhorar aula, workshop, discovery, diagnostico ou proposta. Esse fechamento e o que transforma conteudo em instrumento de trabalho.`,
+  ];
+
+  const avoid = [
+    `Reduzir ${item.title.toLowerCase()} a um comentario rapido sem explorar implicacoes reais.`,
+    'Explicar o tema de forma abstrata, sem caso, sem contexto e sem conexao com a dor da sala.',
+    'Encerrar o assunto sem traduzir o que muda na pratica para o aluno, equipe ou empresa.',
+  ];
+
+  const reflection = [
+    `Como este topico aparece hoje no meu contexto de forma mal explicada, fragmentada ou superficial?`,
+    `Que tipo de decisao melhora quando eu passo a enxergar ${item.title.toLowerCase()} com mais profundidade?`,
+    `Se eu fosse ensinar este assunto amanha, que exemplo real usaria para que a turma reconhecesse valor imediato?`,
+  ];
+
+  const closing = `Memorize este ponto assim: ${item.title} so ganha valor completo quando sai do resumo e entra na explicacao. O objetivo do modulo nao e apenas informar, mas dar repertorio suficiente para analisar, ensinar e aplicar o tema com seguranca.`;
+
+  return { opening, core, context, example, steps, deepDive, avoid, reflection, closing };
+}
+
+function topicApplicationSubject(trail) {
+  if (trail.id === 1) return 'explicar a tese do PHA 2030 com profundidade';
+  if (trail.id === 2) return 'ler salas, perfis e sessoes com mais criterio';
+  return 'desenhar jornadas de transformacao e continuidade com mais maturidade';
+}
+
+function topicExampleLine(trail, module, item, subject) {
+  if (trail.id === 1) {
+    return `Imagine uma reuniao em que a empresa pede apenas "um treinamento sobre IA". Em vez de responder com um catalogo de ferramentas, voce usa ${item.title.toLowerCase()} para explicar o momento do mercado, reposicionar a conversa e mostrar por que o verdadeiro valor esta em ${subject}.`;
+  }
+
+  if (trail.id === 2) {
+    return `Imagine uma turma heterogenea, com gente resistente, curiosa e sobrecarregada. Ao usar ${item.title.toLowerCase()} como lente, voce consegue ajustar ritmo, exemplo e profundidade, evitando que a sessao pareca boa no slide e irrelevante na experiencia real.`;
+  }
+
+  return `Imagine um cliente que saiu de um workshop inspirado, mas ainda sem proximo passo claro. Ao aplicar ${item.title.toLowerCase()}, voce mostra como a conversa pode evoluir para diagnostico, trilha, acompanhamento e uma mudanca mais sustentada do que uma entrega isolada.`;
 }
 
 function pageShell({ title, activeTrailId, trailColor, depth, body }) {
