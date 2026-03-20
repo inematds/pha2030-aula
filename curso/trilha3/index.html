@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jornada de Transformacao e Oferta | PHA 2030</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              900: '#111827',
+              800: '#1f2937',
+              700: '#374151',
+              600: '#4b5563',
+              500: '#6b7280'
+            },
+            primary: '#FACC15'
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .topic-explanation.hidden { display: none; }
+    .topic-explanation { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+  
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+  
+    <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-14">
+          <div class="flex items-center space-x-4">
+            <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+              <span class="text-2xl">🧠</span>
+              <span class="font-bold text-lg hidden sm:inline">PHA 2030</span>
+            </a>
+            <span class="text-neutral-600">|</span>
+            <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+          </div>
+          <div class="flex items-center space-x-1 sm:space-x-2">
+            <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos do PHA 2030</span></a><a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Diagnostico e Conducao da Sala</span></a><a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Jornada de Transformacao e Oferta</span></a>
+            <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+              <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+              <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  
+  
+      
+    <header class="bg-gradient-to-br from-purple-900/30 via-dark-900 to-dark-800 border-b border-dark-600">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <span class="inline-flex px-4 py-2 rounded-full text-xs font-semibold text-purple-400 bg-purple-500/20 border border-purple-500/30 mb-6">TRILHA 3</span>
+        <h1 class="text-4xl font-bold mb-4">Jornada de Transformacao e Oferta</h1>
+        <p class="text-neutral-400 max-w-3xl text-lg mb-8">Maturidade de adocao, desenho de continuidade e modelo comercial do PHA 2030.</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+      <div class="text-neutral-500 text-sm">Modulos</div>
+      <div class="font-bold text-lg">4</div>
+    </div>
+  
+          
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+      <div class="text-neutral-500 text-sm">Topicos</div>
+      <div class="font-bold text-lg">24</div>
+    </div>
+  
+          
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+      <div class="text-neutral-500 text-sm">Duracao</div>
+      <div class="font-bold text-lg">2h 25m</div>
+    </div>
+  
+          
+    <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
+      <div class="text-neutral-500 text-sm">Nivel</div>
+      <div class="font-bold text-lg">Estrategico</div>
+    </div>
+  
+        </div>
+      </div>
+    </header>
+  
+      <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <section class="mb-16">
+          <h2 class="text-2xl font-bold mb-6">Navegacao rapida</h2>
+          <div class="grid md:grid-cols-2 gap-6">
+            
+      <a href="modulo-3-1.html" class="block bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 transition-all p-6">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.1</span>
+          <span class="text-xs text-neutral-500">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">Awareness ate Scale</h3>
+        <p class="text-neutral-400 text-sm">A jornada de maturidade que move pessoas e empresas de curiosas para capazes.</p>
+      </a>
+    
+      <a href="modulo-3-2.html" class="block bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 transition-all p-6">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.2</span>
+          <span class="text-xs text-neutral-500">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">O treinamento como entrada relacional</h3>
+        <p class="text-neutral-400 text-sm">Como a primeira entrega abre caminho para conversas mais profundas e recorrentes.</p>
+      </a>
+    
+      <a href="modulo-3-3.html" class="block bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 transition-all p-6">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.3</span>
+          <span class="text-xs text-neutral-500">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">Do workshop a consultoria aplicada</h3>
+        <p class="text-neutral-400 text-sm">Modelo de continuidade que conecta aprendizagem, diagnostico e implementacao.</p>
+      </a>
+    
+      <a href="modulo-3-4.html" class="block bg-dark-800 rounded-xl border border-dark-600 hover:border-purple-500/30 transition-all p-6">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.4</span>
+          <span class="text-xs text-neutral-500">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">Aplicacao pratica e proximo passo</h3>
+        <p class="text-neutral-400 text-sm">Ferramentas finais para consolidar o curso e orientar acao real.</p>
+      </a>
+    
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="h-px flex-1 bg-dark-600"></div>
+            <span class="text-sm uppercase tracking-[0.2em] text-neutral-500">Conteudo detalhado</span>
+            <div class="h-px flex-1 bg-dark-600"></div>
+          </div>
+          
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.1</span>
+          <span class="text-xs text-neutral-500">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">Awareness ate Scale</h3>
+        <p class="text-neutral-400 text-sm">A jornada de maturidade que move pessoas e empresas de curiosas para capazes.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Awareness</span>
+            <span class="text-neutral-500 text-sm ml-2">- Contato inicial com o tema</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">Nesse estagio a pessoa ouviu falar, testou pouco e ainda nao confia.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Entender esse ponto ajuda a dosar linguagem e expectativa.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">awareness, contato, curiosidade, expectativa, confianca</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Aha moment</span>
+            <span class="text-neutral-500 text-sm ml-2">- Percepcao concreta de valor</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">Aqui a pessoa reconhece algo util e entende por que a IA importa.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Esse e o gatilho que abre espaco para aprender de verdade.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">aha moment, valor, utilidade, gatilho, reconhecimento</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Capability</span>
+            <span class="text-neutral-500 text-sm ml-2">- Uso com repeticao e seguranca</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">A capacidade surge quando o uso passa a ser repetido, orientado e melhor avaliado.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Esse e o momento em que a pessoa deixa de apenas testar.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">capability, repeticao, seguranca, avaliacao, pratica</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Independence</span>
+            <span class="text-neutral-500 text-sm ml-2">- Autonomia operacional</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">Na independencia, a pessoa ou equipe consegue operar sem depender de conducoes constantes.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Esse estagio reduz atrito e aumenta fluidez.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">independence, autonomia, fluidez, atrito, operacao</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Scale</span>
+            <span class="text-neutral-500 text-sm ml-2">- Cultura, processo e vantagem</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">A escala aparece quando a organizacao incorpora IA em fluxos, criterio e gestao.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Esse e o resultado mais maduro da jornada.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">scale, cultura, processo, vantagem, organizacao</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Uso pedagogico da jornada</span>
+            <span class="text-neutral-500 text-sm ml-2">- Ensinar para mover de etapa</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">A aula precisa ser desenhada para deslocar o aluno ao menos um degrau na maturidade.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Isso da intencao real ao curso.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">maturidade, deslocamento, intencao, jornada, ensino</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-3-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-700 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-3-1.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+  
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.2</span>
+          <span class="text-xs text-neutral-500">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">O treinamento como entrada relacional</h3>
+        <p class="text-neutral-400 text-sm">Como a primeira entrega abre caminho para conversas mais profundas e recorrentes.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Aula nao e produto final</span>
+            <span class="text-neutral-500 text-sm ml-2">- Entrada e nao destino</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">No PHA 2030, a aula inicia a relacao e cria base para desdobramentos.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Sem essa visao, o potencial comercial e estrategico diminui.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">entrada, relacao, desdobramento, base, potencial</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Reducao de friccao comercial</span>
+            <span class="text-neutral-500 text-sm ml-2">- Comecar leve para aprofundar melhor</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">Uma primeira experiencia bem desenhada reduz barreiras e aumenta confianca.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Isso facilita conversas sobre diagnostico e acompanhamento.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">friccao, confianca, barreiras, diagnostico, acompanhamento</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Linguagem compartilhada</span>
+            <span class="text-neutral-500 text-sm ml-2">- A turma aprende a nomear o problema</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">Treinamentos estruturados criam vocabulario comum entre lideranca e operacao.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Essa clareza melhora a qualidade das decisoes seguintes.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">linguagem, vocabulario, clareza, decisoes, alinhamento</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Sinalizacao de maturidade</span>
+            <span class="text-neutral-500 text-sm ml-2">- Quem esta pronto para aprofundar</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">A primeira entrega ajuda a identificar interesse, resistencia e prontidao.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Isso orienta a oferta seguinte com menos chute.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">prontidao, interesse, resistencia, oferta, leitura</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Confianca como ativo</span>
+            <span class="text-neutral-500 text-sm ml-2">- Autoridade nasce de utilidade percebida</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">Confianca se acumula quando a experiencia gera clareza e valor reconhecido.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Esse ativo fortalece o posicionamento de parceiro.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">confianca, autoridade, valor, parceiro, posicionamento</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Encadeamento da jornada</span>
+            <span class="text-neutral-500 text-sm ml-2">- Workshop, diagnostico, trilha e acompanhamento</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">A entrada relacional so faz sentido quando existe um fluxo coerente apos a sessao.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Esse encadeamento sustenta recorrencia e impacto.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">workshop, diagnostico, trilha, acompanhamento, recorrencia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-3-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-700 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-3-2.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+  
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.3</span>
+          <span class="text-xs text-neutral-500">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">Do workshop a consultoria aplicada</h3>
+        <p class="text-neutral-400 text-sm">Modelo de continuidade que conecta aprendizagem, diagnostico e implementacao.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Workshop ou palestra</span>
+            <span class="text-neutral-500 text-sm ml-2">- Primeira ativacao</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">A experiencia inicial gera repertorio, alinhamento e visibilidade.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Ela funciona como ponto de partida para uma conversa mais concreta.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">workshop, palestra, repertorio, alinhamento, visibilidade</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Diagnostico ou auditoria</span>
+            <span class="text-neutral-500 text-sm ml-2">- Ler maturidade e gargalos</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">Depois da sensibilizacao, o proximo passo e investigar realidade, risco e oportunidade.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Essa etapa organiza prioridades e reduz generalidade.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">diagnostico, auditoria, maturidade, gargalos, prioridades</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Trilha de capacitacao</span>
+            <span class="text-neutral-500 text-sm ml-2">- Desenvolver capacidade por etapas</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">Com o diagnostico em maos, a capacitacao pode ser desenhada por area, perfil ou objetivo.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Isso aumenta relevancia e aderencia.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">trilha, capacidade, area, perfil, aderencia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Acompanhamento estrategico</span>
+            <span class="text-neutral-500 text-sm ml-2">- Garantir traducao para rotina</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">Acompanhamento serve para revisar uso, remover travas e sustentar comportamento novo.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Sem isso, a energia inicial pode se dissipar.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">acompanhamento, rotina, travas, comportamento, sustentacao</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Consultoria aplicada</span>
+            <span class="text-neutral-500 text-sm ml-2">- Aprofundar quando fizer sentido</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">A consultoria entra melhor quando o cliente ja ganhou clareza e linguagem para priorizar.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Assim a execucao passa a ter mais qualidade e menos desgaste.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">consultoria, clareza, linguagem, priorizacao, qualidade</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Implementacao como ultima camada</span>
+            <span class="text-neutral-500 text-sm ml-2">- Executar com contexto amadurecido</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">Implementacoes fazem mais sentido depois que o terreno humano e organizacional foi preparado.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Essa sequencia melhora retorno e reduz dependencia improdutiva.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">implementacao, contexto, sequencia, retorno, dependencia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-3-3')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-700 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-3-3.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+  
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-purple-400 font-bold">3.4</span>
+          <span class="text-xs text-neutral-500">~35 min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">Aplicacao pratica e proximo passo</h3>
+        <p class="text-neutral-400 text-sm">Ferramentas finais para consolidar o curso e orientar acao real.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Perguntas de reflexao</span>
+            <span class="text-neutral-500 text-sm ml-2">- Ler o proprio contexto</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">O fechamento convida o aluno a localizar dores, maturidade e oportunidade no proprio ambiente.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Sem reflexao, o curso corre risco de ficar apenas inspiracional.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">reflexao, contexto, dores, maturidade, oportunidade</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Mini canvas final</span>
+            <span class="text-neutral-500 text-sm ml-2">- Transformar ideia em plano</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">O canvas organiza realidade atual, oportunidade com IA e proxima acao.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Ele reduz a distancia entre entendimento e teste pratico.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">canvas, plano, realidade, oportunidade, acao</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Proxima acao em 7 dias</span>
+            <span class="text-neutral-500 text-sm ml-2">- Fechamento orientado a movimento</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">A experiencia deve terminar com uma acao simples, testavel e datada.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Isso aumenta compromisso e transferencia.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">7 dias, movimento, teste, compromisso, transferencia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Leitura do contexto da equipe</span>
+            <span class="text-neutral-500 text-sm ml-2">- Pessoa, time ou empresa</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">O plano final precisa considerar em qual camada a mudanca sera iniciada.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Essa distincao evita acao vaga e sem dono.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">pessoa, time, empresa, camada, dono</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Medida de sucesso</span>
+            <span class="text-neutral-500 text-sm ml-2">- Como saber se funcionou</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">O aluno deve definir criterio simples para avaliar ganho de clareza, velocidade ou qualidade.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Isso ajuda a aprender com o teste e ajustar a rota.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">medida, sucesso, clareza, velocidade, qualidade</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="topic-item">
+        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+          <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+          <span class="text-lg">•</span>
+          <div>
+            <span class="font-medium">Mensagem de encerramento</span>
+            <span class="text-neutral-500 text-sm ml-2">- Preparar humanos para operar o futuro</span>
+          </div>
+        </button>
+        <div class="topic-explanation hidden px-6 pb-4">
+          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+            <div>
+              <span class="text-purple-400 font-semibold">O que e:</span>
+              <p class="text-neutral-300 text-sm">O curso fecha reafirmando que IA so gera valor profundo quando amplia capacidade humana e organizacional.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Por que aprender:</span>
+              <p class="text-neutral-300 text-sm">Essa frase amarra a visao completa do PHA 2030.</p>
+            </div>
+            <div>
+              <span class="text-purple-400 font-semibold">Conceitos-chave:</span>
+              <p class="text-neutral-300 text-sm">encerramento, humanos, futuro, valor, visao</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-3-4')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-700 rounded-lg transition-colors">Ver em Modal</button>
+        <a href="modulo-3-4.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+  
+        </section>
+
+        <section class="flex justify-start space-x-3">
+          <a href="../trilha2/index.html" class="px-4 py-2 text-sm bg-dark-700 hover:bg-dark-600 rounded-lg transition-colors">Trilha anterior</a>
+          <a href="../../index.html" class="px-4 py-2 text-sm bg-primary text-dark-900 rounded-lg transition-colors">Rever curso</a>
+        </section>
+      </main>
+      
+      <div id="modal-3-1" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/70" onclick="closeModal('modal-3-1')"></div>
+        <div class="relative max-w-6xl mx-auto mt-10 h-[85vh] px-4">
+          <div class="bg-dark-900 border border-dark-600 rounded-2xl h-full overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-dark-600">
+              <div>
+                <div class="text-sm text-neutral-500">Modulo 3.1</div>
+                <div class="font-semibold">Awareness ate Scale</div>
+              </div>
+              <button onclick="closeModal('modal-3-1')" class="px-3 py-2 text-sm bg-dark-700 hover:bg-dark-600 rounded-lg">Fechar</button>
+            </div>
+            <iframe src="modulo-3-1.html" class="w-full h-[calc(85vh-57px)] bg-white"></iframe>
+          </div>
+        </div>
+      </div>
+    
+      <div id="modal-3-2" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/70" onclick="closeModal('modal-3-2')"></div>
+        <div class="relative max-w-6xl mx-auto mt-10 h-[85vh] px-4">
+          <div class="bg-dark-900 border border-dark-600 rounded-2xl h-full overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-dark-600">
+              <div>
+                <div class="text-sm text-neutral-500">Modulo 3.2</div>
+                <div class="font-semibold">O treinamento como entrada relacional</div>
+              </div>
+              <button onclick="closeModal('modal-3-2')" class="px-3 py-2 text-sm bg-dark-700 hover:bg-dark-600 rounded-lg">Fechar</button>
+            </div>
+            <iframe src="modulo-3-2.html" class="w-full h-[calc(85vh-57px)] bg-white"></iframe>
+          </div>
+        </div>
+      </div>
+    
+      <div id="modal-3-3" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/70" onclick="closeModal('modal-3-3')"></div>
+        <div class="relative max-w-6xl mx-auto mt-10 h-[85vh] px-4">
+          <div class="bg-dark-900 border border-dark-600 rounded-2xl h-full overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-dark-600">
+              <div>
+                <div class="text-sm text-neutral-500">Modulo 3.3</div>
+                <div class="font-semibold">Do workshop a consultoria aplicada</div>
+              </div>
+              <button onclick="closeModal('modal-3-3')" class="px-3 py-2 text-sm bg-dark-700 hover:bg-dark-600 rounded-lg">Fechar</button>
+            </div>
+            <iframe src="modulo-3-3.html" class="w-full h-[calc(85vh-57px)] bg-white"></iframe>
+          </div>
+        </div>
+      </div>
+    
+      <div id="modal-3-4" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-black/70" onclick="closeModal('modal-3-4')"></div>
+        <div class="relative max-w-6xl mx-auto mt-10 h-[85vh] px-4">
+          <div class="bg-dark-900 border border-dark-600 rounded-2xl h-full overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-dark-600">
+              <div>
+                <div class="text-sm text-neutral-500">Modulo 3.4</div>
+                <div class="font-semibold">Aplicacao pratica e proximo passo</div>
+              </div>
+              <button onclick="closeModal('modal-3-4')" class="px-3 py-2 text-sm bg-dark-700 hover:bg-dark-600 rounded-lg">Fechar</button>
+            </div>
+            <iframe src="modulo-3-4.html" class="w-full h-[calc(85vh-57px)] bg-white"></iframe>
+          </div>
+        </div>
+      </div>
+    
+    
+  <footer class="border-t border-dark-600 py-8 mt-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-neutral-500">
+      PHA 2030 | Preparar humanos para operar o futuro.
+    </div>
+  </footer>
+  <script>
+    function toggleTopic(button) {
+      const current = button.parentElement;
+      const container = current.parentElement;
+      const explanation = current.querySelector('.topic-explanation');
+      const items = container.querySelectorAll('.topic-item .topic-explanation');
+      items.forEach((item) => {
+        if (item !== explanation) item.classList.add('hidden');
+      });
+      explanation.classList.toggle('hidden');
+    }
+
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        document.querySelectorAll('[id^="modal-"]').forEach((modal) => modal.classList.add('hidden'));
+        document.body.style.overflow = '';
+      }
+    });
+
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const isDark = () => document.documentElement.classList.contains('dark');
+    const syncIcons = () => {
+      themeToggleDarkIcon.classList.toggle('hidden', !isDark());
+      themeToggleLightIcon.classList.toggle('hidden', isDark());
+    };
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') document.documentElement.classList.remove('dark');
+    if (savedTheme === 'dark') document.documentElement.classList.add('dark');
+    syncIcons();
+    themeToggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark() ? 'dark' : 'light');
+      syncIcons();
+    });
+  </script>
+</body>
+</html>
