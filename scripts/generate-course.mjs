@@ -427,6 +427,7 @@ function renderModulePage(trail, module) {
   const color = colorMap[trail.color];
   const moduleIndex = trail.modules.findIndex((item) => item.id === module.id);
   const nextModule = trail.modules[moduleIndex + 1];
+  const moduleNarrative = getModuleNarrative(module.id);
 
   const sections = module.topics
     .map((item, index) => {
@@ -540,6 +541,13 @@ function renderModulePage(trail, module) {
       </header>
 
       <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        ${moduleNarrative?.intro ? `
+        <section class="mb-16 rounded-2xl border ${color.border} bg-dark-800 p-8">
+          <h2 class="text-2xl font-bold mb-4">Leitura de abertura</h2>
+          <div class="space-y-4 text-neutral-300">
+            ${moduleNarrative.intro.map((paragraph) => `<p>${paragraph}</p>`).join('')}
+          </div>
+        </section>` : ''}
         ${sections}
 
         <section class="rounded-2xl border ${color.border} bg-gradient-to-br ${color.grad} to-transparent p-8">
@@ -562,6 +570,11 @@ function renderModulePage(trail, module) {
 }
 
 function buildTopicDetail(trail, module, item, index) {
+  const customTopic = getModuleNarrative(module.id)?.topics?.[index];
+  if (customTopic) {
+    return customTopic;
+  }
+
   const keywords = item.key.split(',').map((value) => value.trim()).filter(Boolean);
   const subject = topicApplicationSubject(trail);
   const opening = `${item.subtitle}. ${item.what} Neste modulo, o foco e transformar esse conceito em criterio pratico para ${subject}.`;
@@ -609,6 +622,244 @@ function buildTopicDetail(trail, module, item, index) {
   const closing = `Memorize este ponto assim: ${item.title} so ganha valor completo quando sai do resumo e entra na explicacao. O objetivo do modulo nao e apenas informar, mas dar repertorio suficiente para analisar, ensinar e aplicar o tema com seguranca.`;
 
   return { opening, core, context, example, steps, deepDive, avoid, reflection, closing };
+}
+
+function getModuleNarrative(moduleId) {
+  const moduleNarratives = {
+    '1.1': {
+    intro: [
+      'Este modulo precisa funcionar como uma virada de chave. A maior parte das pessoas ainda chega ao tema da IA com uma leitura muito concentrada em ferramenta, novidade ou produtividade imediata. O PHA 2030 comeca em outro lugar: primeiro explicando o momento historico que estamos vivendo, depois mostrando por que o valor mais robusto ja nao esta apenas em construir com tecnologia, mas em preparar gente e organizacao para usar essa tecnologia com inteligencia, criterio e direcao.',
+      'Por isso, o modulo 1.1 nao deve soar como uma cronologia superficial do mercado. Ele precisa mostrar que cada onda da IA ampliou o acesso e, ao mesmo tempo, reduziu a vantagem competitiva de quem vende apenas a camada tecnica do momento. O argumento central e simples: quando o acesso se populariza, o diferencial deixa de ser acesso e passa a ser capacidade de uso, capacidade de adocao e capacidade de transformar aprendizagem em rotina.',
+      'Se essa base ficar clara, o restante do curso se organiza melhor. A tese da educacao como porta, a ideia de Potencial Humano Aumentado e o posicionamento de habilitacao em vez de execucao deixam de parecer slogans isolados e passam a ser consequencias naturais do novo contexto do mercado.',
+    ],
+    topics: [
+      {
+        opening: 'A evolucao de prompts a enterprise. Este topico abre o modulo mostrando que o mercado de IA nao andou em linha reta e que cada onda mudou tanto o tipo de oportunidade quanto o tipo de diferenciacao possivel.',
+        core: [
+          'Quando falamos em ondas do mercado, nao estamos apenas listando novidades tecnologicas. Estamos descrevendo mudancas sucessivas de acesso, expectativa e maturidade. Primeiro veio o encantamento com prompts e interacoes diretas. Depois surgiram GPTs personalizados, integrações por API, automações, agentes, aplicativos criados com grande velocidade e, por fim, a busca por escala em ambiente empresarial.',
+          'O ponto decisivo e que nenhuma dessas ondas anulou a anterior. O que aconteceu foi um empilhamento de camadas. Quanto mais o mercado amadureceu, mais o uso deixou de ser exclusivo de especialistas e passou a entrar na rotina de profissionais, equipes e empresas inteiras.',
+        ],
+        context: [
+          'Muita gente interpreta essas ondas como modismos desconectados. Essa leitura e fraca. O que elas realmente mostram e um movimento de democratizacao: aquilo que antes parecia raro, tecnico e inacessivel vai ficando mais simples, mais barato e mais distribuido. Quando isso acontece, o jogo competitivo muda.',
+          'E exatamente aqui que o PHA 2030 encontra espaco. Se o conhecimento tecnico puro tende a se espalhar, a nova vantagem esta em ajudar pessoas e organizacoes a entender onde usar, como usar, com que criterio usar e como transformar isso em comportamento e processo.',
+        ],
+        example: [
+          'Pense em uma empresa que, em 2023, ficou impressionada com prompts. Em 2024, descobriu automacoes. Em 2025, passou a pedir agentes. Em cada fase, ela acreditou estar olhando para a grande novidade definitiva. Mas o problema de fundo permaneceu: a equipe seguia sem linguagem comum, sem criterio de uso e sem um caminho claro de adocao.',
+          'Nesse caso, o facilitador nao deveria responder apenas mostrando a proxima ferramenta da moda. O mais valioso seria explicar a sequencia das ondas e mostrar que o desafio real nao e correr atras da ultima camada tecnica, mas construir capacidade organizacional para atravessar qualquer nova camada que surgir.',
+        ],
+        steps: [
+          'Apresente as ondas como um mapa de maturidade do mercado, e nao como uma lista de buzzwords.',
+          'Explique o que cada onda ampliou em termos de acesso e o que ela reduziu em termos de exclusividade tecnica.',
+          'Feche reforcando que quem entende a evolucao do mercado consegue reposicionar melhor sua oferta, seu curso e sua conversa comercial.',
+        ],
+        deepDive: [
+          'Em formato de livro, este topico precisa ensinar a ler tempo e contexto. O erro mais comum e olhar para a IA como se ela tivesse explodido de uma vez e como se todas as oportunidades valessem igual. Nao valem. Cada fase reorganizou o mercado e mudou a natureza da vantagem competitiva.',
+          'Na fase inicial do entusiasmo, bastava conhecer melhor a ferramenta do que a media. Isso gerava aura de novidade e capturava atencao. Mas, conforme novas interfaces apareceram e o uso se simplificou, o mercado começou a punir quem construiu posicionamento apenas em cima da ultima camada tecnica. O que ontem parecia diferencial, hoje ja parece requisito minimo.',
+          'Essa leitura ajuda o aluno a abandonar uma ansiedade comum: a de achar que precisa dominar toda nova onda antes de conseguir gerar valor. O modulo mostra o contrario. O valor mais estavel nao nasce de correr atras de cada nova ferramenta. Nasce de entender o padrao por tras delas e de saber conduzir pessoas por esse padrao com mais clareza do que a concorrencia.',
+          'Por isso, ondas do mercado nao e um topico acessorio. Ele prepara terreno para a tese inteira do PHA 2030. Quando o aluno entende a sequencia, ele percebe por que educacao, habilitacao e adocao estruturada deixam de ser discurso bonito e passam a ser leitura estrategica do momento.',
+        ],
+        avoid: [
+          'Transformar as ondas em um desfile de nomes e siglas sem explicar o que mudou na dinamica de valor.',
+          'Dar a entender que cada nova onda substitui completamente a anterior.',
+          'Usar a cronologia apenas para impressionar, sem conectar isso ao reposicionamento do curso ou da oferta.',
+        ],
+        reflection: [
+          'Em qual onda eu ainda estou mentalmente preso ao tentar explicar IA para clientes ou alunos?',
+          'O que no meu discurso ainda depende demais da novidade tecnica do momento?',
+          'Como eu explicaria essa evolucao para mostrar que o diferencial atual esta menos em ferramenta e mais em adocao?',
+        ],
+        closing: 'Memorize assim: as ondas mudam a superficie do mercado, mas revelam um mesmo movimento de fundo. Quanto mais o acesso se democratiza, mais valor ganha quem organiza aprendizagem, criterio e adocao.',
+      },
+      {
+        opening: 'Quando o acesso deixa de ser diferencial. Aqui o modulo mostra por que a popularizacao das ferramentas altera o jogo comercial e enfraquece propostas centradas apenas na execucao tecnica.',
+        core: [
+          'Comoditizacao tecnica significa que aquilo que antes gerava vantagem apenas por ser dificil, raro ou inacessivel passa a ficar disponivel para muito mais gente. Isso nao quer dizer que a tecnologia perdeu valor. Quer dizer que o valor deixou de estar concentrado somente em saber mexer nela.',
+          'No contexto da IA, esse processo e visivel. Ferramentas ficaram mais intuitivas, integrações se multiplicaram, tutoriais se espalharam e o repertorio minimo de uso se disseminou com velocidade. O acesso aumentou e, com ele, a necessidade de reposicionar a proposta de valor.',
+        ],
+        context: [
+          'Muitos profissionais sentem essa mudanca como perda. Na verdade, ela e uma mudanca de camada. Se voce insiste em vender apenas implementacao ou execucao da tecnologia do momento, sua margem tende a cair e sua posicao tende a se tornar mais tática.',
+          'Mas, se voce entende a comoditizacao como um sinal de maturidade do mercado, enxerga outra oportunidade: ajudar clientes a sair do improviso e entrar em uso orientado, aprendizado estruturado e decisao melhor.',
+        ],
+        example: [
+          'Imagine dois profissionais. O primeiro vende "automacao com IA" como produto final. O segundo entra ensinando a equipe a reconhecer gargalos, avaliar onde IA realmente faz sentido e desenhar uma jornada de adocao. Quando a ferramenta muda ou fica comum, o primeiro perde diferencial mais rapido. O segundo segue relevante porque vende leitura, criterio e capacidade.',
+          'Esse exemplo mostra por que o PHA 2030 nao reage a comoditizacao com medo, mas com reposicionamento. O acesso popularizado nao mata oportunidade. Ele desloca a oportunidade para outro lugar.',
+        ],
+        steps: [
+          'Explique ao aluno a diferenca entre perda de raridade tecnica e perda de valor real.',
+          'Mostre como a comoditizacao pressiona modelos de execucao isolada e favorece modelos de habilitacao.',
+          'Conclua com a pergunta central: se a ferramenta ficou mais acessivel, onde exatamente eu vou concentrar meu valor daqui para frente?',
+        ],
+        deepDive: [
+          'Em um capitulo mais aprofundado, comoditizacao tecnica precisa ser tratada sem dramatizacao. O mercado de tecnologia sempre fez isso: transforma diferencial raro em capacidade mais comum. O problema nao e a comoditizacao em si. O problema e insistir em um posicionamento que dependia de escassez tecnica para continuar parecendo valioso.',
+          'No caso da IA, o que esta se tornando comum nao e o impacto potencial da tecnologia, mas o acesso a interfaces, modelos e experimentacoes basicas. Isso exige uma resposta madura. Em vez de tentar proteger o valor por meio de complexidade artificial, o caminho mais robusto e deslocar o centro da proposta para criterio, metodo, treinamento bem conduzido e capacidade de decisao.',
+          'Esse movimento tambem muda a relacao com o cliente. Antes, bastava vender o entregavel. Agora, faz mais sentido vender clareza, confianca e maturidade de uso. O cliente continua precisando de ajuda, mas a ajuda mais valiosa ja nao e apenas tecnica. Ela passa a ser educativa, diagnostica e estrategica.',
+          'Essa e uma das ideias mais importantes do curso: a comoditizacao nao elimina o profissional relevante. Ela elimina o profissional que parou na camada errada de valor.',
+        ],
+        avoid: [
+          'Tratar a comoditizacao como se significasse que qualquer pessoa faz tudo com a mesma qualidade.',
+          'Responder a popularizacao tentando aumentar artificialmente a complexidade da proposta.',
+          'Explicar o tema sem conectar sua implicacao direta no posicionamento comercial.',
+        ],
+        reflection: [
+          'Em que parte da minha oferta eu ainda dependo de raridade tecnica para parecer valioso?',
+          'Se o cliente hoje acessa a ferramenta sozinho, por que ele ainda precisaria de mim?',
+          'Que parte do meu valor eu poderia reposicionar para criterio, treinamento e transformacao?',
+        ],
+        closing: 'Memorize assim: quando a tecnica se espalha, o valor nao desaparece. Ele sobe de camada e premia quem organiza capacidade, e nao apenas quem opera ferramenta.',
+      },
+      {
+        opening: 'Adocao melhor que fascinacao. Este topico desloca a atencao do brilho da tecnologia para a capacidade de gerar uso consistente, criterio e transformacao.',
+        core: [
+          'A nova fronteira de valor nao esta em impressionar com o que a IA consegue fazer em laboratorio ou em palco. Ela esta em ajudar pessoas e empresas a usar a IA de forma repetivel, segura e conectada a problemas reais.',
+          'Isso muda a natureza da entrega. A pergunta central deixa de ser "o que a ferramenta faz?" e passa a ser "como isso entra de forma util, pratica e sustentavel no trabalho, na decisao e no processo?"',
+        ],
+        context: [
+          'Mercados imaturos valorizam fascinacao. Mercados mais maduros valorizam integracao. Quando a IA estava em fase de deslumbre, demonstracao sofisticada bastava para capturar atencao. Agora, atencao sem adocao tem vida curta.',
+          'O PHA 2030 se apoia justamente nessa transicao. Em vez de vender encantamento passageiro, ele vende caminho de capacidade. Isso explica por que a proposta do curso se conecta tao bem a diagnostico, auditoria, trilha e acompanhamento.',
+        ],
+        example: [
+          'Pense em duas demos. A primeira e brilhante, rapida e tecnicamente impressionante, mas nao conversa com nenhuma dor clara da sala. A segunda e simples: resume informacoes dispersas, organiza um plano e ajuda a decidir o proximo passo. A segunda costuma gerar mais valor porque e reconhecivel.',
+          'Esse contraste ensina uma regra de ouro do PHA 2030: a melhor entrega nao e a mais sofisticada. E a que ajuda o aluno a sair da abstracao e enxergar um uso pratico que ele conseguiria incorporar depois.',
+        ],
+        steps: [
+          'Mostre que fascinacao atrai, mas nao sustenta comportamento.',
+          'Explique que adocao exige repeticao, clareza de uso, contexto e criterio.',
+          'Leve o aluno a perceber que propostas mais fortes sao as que reduzem distancia entre descobrir e incorporar.',
+        ],
+        deepDive: [
+          'Como capitulo, este topico precisa combater um erro cultural importante: confundir demonstracao com transformacao. Demonstracao bem feita pode gerar entusiasmo. Transformacao exige algo a mais: continuidade, traducao para a rotina e ganho concreto percebido pelo aluno ou pela equipe.',
+          'Em muitos ambientes, a IA ainda entra como espetaculo. Ela aparece em lives, palestras, cases isolados e promessas grandiosas. Isso produz fascinio, mas tambem pode produzir cansaco. A pessoa sai impressionada e, ao mesmo tempo, sem saber o que fazer na segunda-feira.',
+          'A fronteira nova de valor aparece exatamente nesse ponto de friccao. Quem sabe traduzir possibilidade em uso reconhecivel ocupa um lugar muito mais estrategico. Essa pessoa consegue diminuir medo, reduzir excesso de informacao e construir confianca real.',
+          'Por isso, a palavra-chave aqui e adocao. Adocao e a ponte entre repertorio e resultado. Sem ela, a IA vira curiosidade. Com ela, a IA passa a ser capacidade.',
+        ],
+        avoid: [
+          'Construir o topico como defesa vaga de consultoria sem mostrar a mudanca concreta de valor.',
+          'Opor tecnica e adocao como se uma anulasse a outra.',
+          'Manter o discurso no campo da inspiracao sem mostrar o que muda no desenho da entrega.',
+        ],
+        reflection: [
+          'Minhas entregas hoje geram fascinacao ou adocao?',
+          'Onde os alunos ou clientes costumam travar depois de entender o potencial da IA?',
+          'O que eu preciso mudar para diminuir a distancia entre interesse inicial e uso recorrente?',
+        ],
+        closing: 'Memorize assim: fascinacao abre olhos, mas adocao muda comportamento. A nova fronteira de valor esta em conduzir essa passagem.',
+      },
+      {
+        opening: 'Mudanca de foco do mercado. Este topico mostra como a conversa sobre IA precisa sair do hype e entrar na construcao de capacidade humana e organizacional.',
+        core: [
+          'Do hype a capacidade e uma mudanca de enquadramento. O mercado passou por uma fase em que bastava provar que a IA era impressionante. Hoje, o desafio mais relevante e provar que ela pode ser incorporada com metodo, limite e impacto reconhecivel.',
+          'Esse deslocamento muda aula, workshop, reuniao comercial e proposta de valor. Em todos esses contextos, a pergunta certa deixa de ser "como impressionar?" e passa a ser "como mover a pessoa de curiosa para capaz?"',
+        ],
+        context: [
+          'O hype teve utilidade: ele chamou atencao e acelerou a curiosidade do mercado. Mas, se a conversa para ai, a organizacao fica cheia de expectativa e pobre em capacidade. O resultado costuma ser dispersao, teste sem direcao e pouco efeito estrutural.',
+          'O PHA 2030 entra justamente para fazer essa virada. Ele nao nega o potencial da tecnologia. Ele organiza esse potencial dentro de uma jornada de aprendizagem, criterio, autonomia e cultura.',
+        ],
+        example: [
+          'Imagine uma lideranca que pede um evento sobre IA porque "todo mundo esta falando disso". Uma resposta baseada em hype tentaria inflar medo ou deslumbramento. Uma resposta baseada em capacidade mostraria onde a equipe perde tempo, onde a informacao se dispersa e como IA pode ser usada para ampliar clareza e autonomia.',
+          'Nesse segundo caso, a conversa fica menos teatral e muito mais estrategica. Ela deixa de depender da moda do momento e passa a se apoiar em dores reais e resultados observaveis.',
+        ],
+        steps: [
+          'Reconheca que o hype existiu e explique por que ele foi insuficiente.',
+          'Conecte capacidade a repeticao, criterio, autonomia e melhoria de processo.',
+          'Feche deixando claro que a missao do curso e ensinar uso inteligente, e nao apenas entusiasmo tecnologico.',
+        ],
+        deepDive: [
+          'Como texto de livro, este topico precisa ter firmeza conceitual. A transicao do hype para a capacidade e uma mudanca de maturidade de mercado. Isso quer dizer que as perguntas mais importantes tambem mudaram. Em vez de perguntar apenas se a tecnologia funciona, passamos a perguntar para quem ela funciona, em que processo, com qual limite e com qual efeito real.',
+          'Quando essa transicao nao acontece, a organizacao vive um tipo de fadiga: muita conversa sobre IA, pouca traducao para a rotina e quase nenhuma melhoria sustentada. O hype gera expectativa, mas a falta de criterio gera frustracao. E uma empresa frustrada tende a concluir que a tecnologia foi superestimada, quando na verdade o que faltou foi metodo de adocao.',
+          'O PHA 2030 corrige esse erro ao colocar capacidade no centro. Capacidade significa repertorio, confianca, avaliacao de qualidade, clareza sobre quando usar e sobre quando nao usar. Em outras palavras, capacidade e o oposto de improviso.',
+          'Por isso, este topico nao e apenas sobre linguagem. Ele e sobre arquitetura de mudanca. Quando o mercado troca hype por capacidade, o profissional que ensina e conduz bem passa a valer mais do que o profissional que apenas repete novidades.',
+        ],
+        avoid: [
+          'Ridicularizar o hype sem reconhecer que ele ajudou a abrir o mercado.',
+          'Usar a palavra capacidade como conceito vago, sem definir o que ela envolve.',
+          'Tratar maturidade como algo automatico, sem trabalho pedagógico e organizacional.',
+        ],
+        reflection: [
+          'Que sinais de hype sem capacidade eu vejo no meu contexto hoje?',
+          'Como eu explicaria capacidade de um jeito concreto para uma equipe nao tecnica?',
+          'Onde minha entrega ainda estimula mais curiosidade do que mudanca real?',
+        ],
+        closing: 'Memorize assim: hype chama atencao, mas capacidade sustenta resultado. O mercado esta premiando cada vez mais quem entende essa diferenca.',
+      },
+      {
+        opening: 'Sobrecarga, lentidao e retrabalho. Aqui o modulo traz a conversa de volta para a realidade cotidiana e mostra por que a IA precisa ser conectada a dores reconheciveis, nao a abstracoes.',
+        core: [
+          'Mesmo com toda a evolucao tecnica, muitas empresas continuam operando sob excesso de informacao, retrabalho, lentidao de decisao e dependencia de poucas pessoas. Isso e importante porque impede uma leitura romantizada da IA.',
+          'Se o curso nao nomeia essas dores, ele flutua. O aluno pode ate concordar intelectualmente com a importancia do tema, mas nao reconhece onde aquilo entra no seu trabalho, na sua equipe ou na sua organizacao.',
+        ],
+        context: [
+          'Nomear problemas persistentes e o que tira a conversa da propaganda e coloca no terreno da utilidade. O mercado nao precisa apenas de mais discurso sobre futuro. Ele precisa de traducao entre tecnologia e friccao real.',
+          'E justamente por isso que o PHA 2030 insiste tanto em diagnostico, discovery e demonstração conectada a dor. A melhor conversa sobre IA nao comeca na ferramenta. Ela comeca na friccao.',
+        ],
+        example: [
+          'Pense em uma equipe que perde horas consolidando informacoes espalhadas, revendo arquivos duplicados e esperando validacoes para seguir. Se a aula fala apenas sobre agentes e automacoes, pode soar distante. Se ela parte dessa dor e mostra como IA ajuda a resumir, organizar e acelerar decisao, o valor fica concreto.',
+          'A dor reconhecivel faz duas coisas ao mesmo tempo: reduz ceticismo e aumenta aderencia. A pessoa para de ouvir a partir do discurso geral e comeca a escutar a partir do proprio problema.',
+        ],
+        steps: [
+          'Mapeie quais dores aparecem com mais frequencia na sala ou na empresa.',
+          'Traduza cada dor em um tipo de uso possivel para IA, sem prometer milagre.',
+          'Mostre que o ganho nao e apenas produtividade; e tambem clareza, autonomia e qualidade de decisao.',
+        ],
+        deepDive: [
+          'Como capitulo, este topico precisa ter um papel de aterrissagem. Ate aqui, o modulo explicou ondas, comoditizacao, nova fronteira de valor e mudanca do hype para capacidade. Agora ele precisa responder: tudo isso conversa com qual dor concreta? A resposta e simples: conversa com o trabalho real das pessoas.',
+          'Sobrecarga nao e apenas excesso de tarefa. Ela e excesso de contexto mal organizado. Lentidao nao e apenas falta de vontade. Muitas vezes ela e resultado de informacao espalhada, dependencia decisoria e baixa clareza. Retrabalho nao e apenas falha de execucao. Frequentemente ele e sintoma de processo ruim, comunicacao fraca e falta de criterio.',
+          'Quando a IA entra nesse quadro com inteligencia, ela ajuda a reduzir friccao. Mas o curso precisa ser honesto: ela nao entra sozinha. Ela depende de problema bem nomeado, de pergunta bem formulada e de acompanhamento minimo para virar pratica consistente. Esse e um ponto central do PHA 2030.',
+          'Por isso, este topico tambem prepara o aluno para discovery. Quem nao sabe nomear dor nao sabe escolher demo. Quem nao sabe escolher demo nao consegue gerar aha moment. E quem nao gera aha moment dificilmente cria abertura para transformacao.',
+        ],
+        avoid: [
+          'Falar de dores genéricas sem mostrar como elas aparecem no cotidiano da operação.',
+          'Prometer que IA resolve toda sobrecarga automaticamente.',
+          'Separar problema de demonstração, como se fossem etapas independentes.',
+        ],
+        reflection: [
+          'Quais dores sao mais reconheciveis no meu contexto hoje?',
+          'Que problema real eu usaria como porta de entrada para falar de IA sem soar abstrato?',
+          'Onde eu ainda falo mais da tecnologia do que da friccao que justifica seu uso?',
+        ],
+        closing: 'Memorize assim: o valor da IA aparece melhor quando encontra uma dor reconhecivel. Sem dor clara, a conversa fica bonita. Com dor clara, ela ganha relevancia.',
+      },
+      {
+        opening: 'Oportunidade para quem habilita. O fechamento do modulo mostra por que todo esse contexto desemboca em uma oportunidade estrategica: preparar pessoas e organizacoes para adotar IA melhor do que a media.',
+        core: [
+          'Se as ondas democratizaram o acesso, se a tecnica ficou menos exclusiva, se a adocao passou a valer mais que a fascinacao e se as empresas seguem cheias de dor operacional, entao a oportunidade mais robusta esta em habilitar. Habilitar significa ensinar, diagnosticar, organizar caminho e sustentar mudanca.',
+          'Esse topico fecha o raciocinio do modulo 1.1 ligando contexto de mercado a posicionamento. Ele prepara o aluno para entender por que o PHA 2030 nao e uma empresa de curso no sentido estreito, mas uma proposta de Potencial Humano Aumentado.',
+        ],
+        context: [
+          'Muita gente ainda olha para educacao como produto de entrada de baixo valor. O PHA 2030 inverte essa leitura. A educacao e valiosa porque ela abre a conversa certa, cria confianca, reduz friccao, revela gargalos e prepara terreno para diagnostico, auditoria, acompanhamento e consultoria.',
+          'Quando voce entende isso, seu lugar no mercado muda. Em vez de disputar apenas por execucao, voce passa a disputar por clareza, condução e capacidade de transformar tecnologia em maturidade real.',
+        ],
+        example: [
+          'Imagine dois caminhos comerciais. No primeiro, voce oferece construir algo para o cliente imediatamente. No segundo, voce entra com uma sessao de capacitacao bem orientada, identifica dores, mapeia maturidade e desenha continuidade. O segundo caminho tende a gerar mais confianca, relacao mais profunda e implementacao posterior de melhor qualidade.',
+          'Esse exemplo nao significa que execucao perdeu valor. Significa que a execucao ganha muito mais valor quando vem depois da habilitacao, e nao no lugar dela.',
+        ],
+        steps: [
+          'Amarre os topicos anteriores em uma tese unica de mercado.',
+          'Mostre por que habilitar nao e um detalhe pedagogico, mas uma posicao estrategica.',
+          'Feche o modulo preparando o aluno para a grande tese seguinte: educacao e a porta, transformacao e o negocio real.',
+        ],
+        deepDive: [
+          'Como encerramento de capitulo, este topico precisa produzir convergencia. Tudo o que foi apresentado ate aqui aponta para uma mesma conclusao: o mercado de IA esta premiando menos quem apenas opera tecnologia e mais quem consegue transformar acesso em uso, uso em capacidade e capacidade em cultura.',
+          'Essa conclusao muda a forma de olhar para o proprio negocio. Em vez de pensar "como vendo mais uma solucao?", a pergunta passa a ser "como preparo melhor essa empresa para usar IA com inteligencia?". Esse ajuste de pergunta muda a postura comercial, a didatica e a profundidade da relacao com o cliente.',
+          'Tambem muda o lugar do ensino. O treinamento deixa de ser visto como evento solto e passa a ser visto como mecanismo de entrada relacional e estrategica. E por isso que o PHA 2030 usa a educacao como porta. A aula abre a conversa. O diagnostico aprofunda. O acompanhamento sustenta. A consultoria organiza. A implementacao entra quando faz sentido.',
+          'Esse e o verdadeiro fechamento do modulo 1.1: o contexto do mercado nao e apenas uma analise externa. Ele e o argumento que justifica toda a arquitetura do curso e toda a proposta do PHA 2030.',
+        ],
+        avoid: [
+          'Apresentar habilitacao como ideia vaga, sem ligar isso ao contexto de mercado explicado antes.',
+          'Falar de transformacao sem mostrar o papel concreto da educacao na entrada da jornada.',
+          'Criar oposicao simplista entre ensinar e executar, como se fossem mundos separados.',
+        ],
+        reflection: [
+          'Que oportunidade eu perco quando vendo apenas execucao e nao habilitacao?',
+          'Como eu explicaria para um cliente que a educacao nao e o fim, mas o melhor comeco?',
+          'O que no contexto do mercado atual reforca que esse posicionamento faz sentido agora?',
+        ],
+        closing: 'Memorize assim: quem entende o novo contexto percebe que habilitar nao e uma etapa menor. E a resposta mais estrategica para um mercado em que o acesso se espalhou e a maturidade virou diferencial.',
+      },
+    ],
+    },
+  };
+
+  return moduleNarratives[moduleId] || null;
 }
 
 function topicApplicationSubject(trail) {
