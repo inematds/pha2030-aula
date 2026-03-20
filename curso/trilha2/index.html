@@ -3,33 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diagnostico e Conducao da Sala | PHA 2030</title>
+  <title>Trilha 2 | PHA 2030</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
-            dark: {
-              900: '#111827',
-              800: '#1f2937',
-              700: '#374151',
-              600: '#4b5563',
-              500: '#6b7280'
-            },
-            primary: '#FACC15'
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
           }
         }
       }
-    };
+    }
   </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .topic-explanation.hidden { display: none; }
-    .topic-explanation { display: block; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
     html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
@@ -41,12 +36,15 @@
     html:not(.dark) .text-neutral-500 { color: #9ca3af; }
     html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
     html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
-    
+
     html:not(.dark) .text-blue-400 { color: #2563eb; }
     html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37, 99, 235, 0.12); }
     html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37, 99, 235, 0.08); }
     html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
-  
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+
     html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
     html:not(.dark) .text-primary { color: #a16207; }
     html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
@@ -59,965 +57,319 @@
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
-  
-    <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-14">
-          <div class="flex items-center space-x-4">
-            <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
-              <span class="text-2xl">🧠</span>
-              <span class="font-bold text-lg hidden sm:inline">PHA 2030</span>
-            </a>
-            <span class="text-neutral-600">|</span>
-            <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
-          </div>
-          <div class="flex items-center space-x-1 sm:space-x-2">
-            <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos do PHA 2030</span></a><a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Diagnostico e Conducao da Sala</span></a><a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Jornada de Transformacao e Oferta</span></a>
-            <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
-              <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-              </svg>
-              <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-              </svg>
-            </button>
-          </div>
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">PHA</span>
+            <span class="font-bold text-lg hidden sm:inline">PHA 2030</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../../index.html#trilhas" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Fundamentos da IA</span>
+          </a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Capacitacao e Transformacao</span>
+          </a>
+          <a href="../../index.html#trilhas" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Escala e Consultoria</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
         </div>
       </div>
-    </nav>
-  
-  
-      
-    <header class="bg-gradient-to-br from-blue-900/30 via-dark-900 to-dark-800 border-b border-dark-600">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <span class="inline-flex px-4 py-2 rounded-full text-xs font-semibold text-blue-400 bg-blue-500/20 border border-blue-500/30 mb-6">TRILHA 2</span>
-        <h1 class="text-4xl font-bold mb-4">Diagnostico e Conducao da Sala</h1>
-        <p class="text-neutral-400 max-w-3xl text-lg mb-8">Perfis humanos, discovery, aha moment e estrutura de experiencias de aprendizagem e alinhamento.</p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          
-    <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
-      <div class="text-neutral-500 text-sm">Modulos</div>
-      <div class="font-bold text-lg">4</div>
     </div>
-  
-          
-    <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
-      <div class="text-neutral-500 text-sm">Topicos</div>
-      <div class="font-bold text-lg">24</div>
-    </div>
-  
-          
-    <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
-      <div class="text-neutral-500 text-sm">Duracao</div>
-      <div class="font-bold text-lg">2h 30m</div>
-    </div>
-  
-          
-    <div class="bg-dark-800 rounded-xl border border-dark-600 p-4">
-      <div class="text-neutral-500 text-sm">Nivel</div>
-      <div class="font-bold text-lg">Aplicado</div>
-    </div>
-  
-        </div>
-      </div>
-    </header>
-  
-      <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <section class="mb-16">
-          <h2 class="text-2xl font-bold mb-6">Navegacao rapida</h2>
-          <div class="grid md:grid-cols-2 gap-6">
-            
-      <a href="modulo-2-1.html" class="block bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 transition-all p-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-blue-400 font-bold">2.1</span>
-          <span class="text-xs text-neutral-500">~35 min</span>
-        </div>
-        <h3 class="text-2xl font-bold mb-2">Os quatro perfis da sala</h3>
-        <p class="text-neutral-400 text-sm">Como ler estados emocionais e niveis de abertura para mudanca.</p>
-      </a>
-    
-      <a href="modulo-2-2.html" class="block bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 transition-all p-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-blue-400 font-bold">2.2</span>
-          <span class="text-xs text-neutral-500">~35 min</span>
-        </div>
-        <h3 class="text-2xl font-bold mb-2">Discovery antes da entrega</h3>
-        <p class="text-neutral-400 text-sm">As perguntas que precisam ser respondidas antes de qualquer workshop ou demonstracao.</p>
-      </a>
-    
-      <a href="modulo-2-3.html" class="block bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 transition-all p-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-blue-400 font-bold">2.3</span>
-          <span class="text-xs text-neutral-500">~35 min</span>
-        </div>
-        <h3 class="text-2xl font-bold mb-2">Como criar o aha moment</h3>
-        <p class="text-neutral-400 text-sm">Critrios para montar demonstracoes reconheciveis e realmente uteis.</p>
-      </a>
-    
-      <a href="modulo-2-4.html" class="block bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 transition-all p-6">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-blue-400 font-bold">2.4</span>
-          <span class="text-xs text-neutral-500">~35 min</span>
-        </div>
-        <h3 class="text-2xl font-bold mb-2">Estrutura de aula e workshop</h3>
-        <p class="text-neutral-400 text-sm">Como organizar uma sessao de alto impacto do enquadramento ao fechamento.</p>
-      </a>
-    
-          </div>
-        </section>
+  </nav>
 
-        <section class="mb-12">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="h-px flex-1 bg-dark-600"></div>
-            <span class="text-sm uppercase tracking-[0.2em] text-neutral-500">Conteudo detalhado</span>
-            <div class="h-px flex-1 bg-dark-600"></div>
-          </div>
-          
+  <header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">
+        TRILHA 2
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">Capacitacao e Transformacao</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        A trilha que organiza a tese central do PHA 2030: educacao como porta de entrada, discovery como metodo e transformacao como desdobramento estrategico.
+      </p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 max-w-3xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">8</div>
+          <div class="text-xs text-neutral-400">Modulos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">48</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">~4h</div>
+          <div class="text-xs text-neutral-400">Duracao</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-blue-400">Intermediario</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-2xl font-bold mb-2">Navegacao rapida</h2>
+          <p class="text-neutral-400">Acesse qualquer modulo da trilha em um clique.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <a href="modulo-2-1.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/30 hover:bg-blue-500/10 transition-colors">
+          <span class="text-blue-400 font-bold">2.1</span>
+          <h3 class="text-2xl font-bold mt-2 mb-2">Panorama e mudanca de fase</h3>
+          <p class="text-neutral-400 text-sm">Por que o valor saiu da ferramenta e foi para a capacidade de adocao.</p>
+        </a>
+        <a href="modulo-2-2.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/30 hover:bg-blue-500/10 transition-colors">
+          <span class="text-blue-400 font-bold">2.2</span>
+          <h3 class="text-2xl font-bold mt-2 mb-2">Educacao como porta</h3>
+          <p class="text-neutral-400 text-sm">A tese de entrada: treinamentos geram confianca, mas nao encerram o trabalho.</p>
+        </a>
+        <a href="modulo-2-3.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/30 hover:bg-blue-500/10 transition-colors">
+          <span class="text-blue-400 font-bold">2.3</span>
+          <h3 class="text-2xl font-bold mt-2 mb-2">O que e transformacao</h3>
+          <p class="text-neutral-400 text-sm">Transformacao como mudanca de capacidade individual, coletiva e organizacional.</p>
+        </a>
+        <a href="modulo-2-4.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/30 hover:bg-blue-500/10 transition-colors">
+          <span class="text-blue-400 font-bold">2.4</span>
+          <h3 class="text-2xl font-bold mt-2 mb-2">Posicionamento PHA 2030</h3>
+          <p class="text-neutral-400 text-sm">Como apresentar a proposta, a promessa e a narrativa comercial do programa.</p>
+        </a>
+        <a href="modulo-2-5.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/30 hover:bg-blue-500/10 transition-colors">
+          <span class="text-blue-400 font-bold">2.5</span>
+          <h3 class="text-2xl font-bold mt-2 mb-2">Execucao versus habilitacao</h3>
+          <p class="text-neutral-400 text-sm">O contraste entre vender projeto pontual e vender evolucao com recorrencia.</p>
+        </a>
+        <a href="modulo-2-6.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/30 hover:bg-blue-500/10 transition-colors">
+          <span class="text-blue-400 font-bold">2.6</span>
+          <h3 class="text-2xl font-bold mt-2 mb-2">Os 4 perfis da sala</h3>
+          <p class="text-neutral-400 text-sm">Como conduzir ceticos, champions, iniciantes empolgados e sobrecarregados.</p>
+        </a>
+        <a href="modulo-2-7.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/30 hover:bg-blue-500/10 transition-colors">
+          <span class="text-blue-400 font-bold">2.7</span>
+          <h3 class="text-2xl font-bold mt-2 mb-2">Discovery e aha moment</h3>
+          <p class="text-neutral-400 text-sm">As perguntas que definem a demonstracao certa e elevam a relevancia da sessao.</p>
+        </a>
+        <a href="modulo-2-8.html" class="bg-dark-800 rounded-xl border border-dark-600 p-6 hover:border-blue-500/30 hover:bg-blue-500/10 transition-colors">
+          <span class="text-blue-400 font-bold">2.8</span>
+          <h3 class="text-2xl font-bold mt-2 mb-2">Jornada, modelo e proximo passo</h3>
+          <p class="text-neutral-400 text-sm">Como transformar awareness em cultura, servico recorrente e consultoria aplicada.</p>
+        </a>
+      </div>
+    </section>
+
+    <div class="flex items-center space-x-4 mb-8">
+      <div class="h-px bg-dark-600 flex-1"></div>
+      <span class="text-sm uppercase tracking-[0.25em] text-neutral-500">Conteudo detalhado</span>
+      <div class="h-px bg-dark-600 flex-1"></div>
+    </div>
+
     <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2">
           <span class="text-blue-400 font-bold">2.1</span>
-          <span class="text-xs text-neutral-500">~35 min</span>
+          <span class="text-xs text-neutral-500">~28 min</span>
         </div>
-        <h3 class="text-2xl font-bold mb-2">Os quatro perfis da sala</h3>
-        <p class="text-neutral-400 text-sm">Como ler estados emocionais e niveis de abertura para mudanca.</p>
+        <h3 class="text-2xl font-bold mb-2">Panorama e mudanca de fase</h3>
+        <p class="text-neutral-400 text-sm">Entenda por que o diferencial deixou de ser acesso tecnico e passou a ser adocao com criterio.</p>
       </div>
       <div class="divide-y divide-dark-600">
-        
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Ceticos</span>
-            <span class="text-neutral-500 text-sm ml-2">- Resistencia, medo e defesa</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Ceticos podem resistir por receio de substituicao, qualidade ou hype exagerado.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Ler essa resistencia evita confronto improdutivo e melhora a conducao.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">ceticos, medo, qualidade, resistencia, conducao</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Champions</span>
-            <span class="text-neutral-500 text-sm ml-2">- Aliados que puxam a mudanca</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Champions ja acreditam no valor da IA e podem funcionar como multiplicadores.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Quando bem usados, ajudam a sustentar o avancar da sessao.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">champions, aliados, multiplicadores, energia, apoio</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Iniciantes empolgados</span>
-            <span class="text-neutral-500 text-sm ml-2">- Curiosidade alta, estrutura baixa</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Esse perfil quer aprender rapido, mas se frustra se a sessao pesar demais.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Criar vitorias rapidas ajuda a converter entusiasmo em confianca.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">iniciantes, curiosidade, frustracao, confianca, vitorias</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Sobrecarregados</span>
-            <span class="text-neutral-500 text-sm ml-2">- Quem precisa de organizacao</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Pessoas sobrecarregadas ja sabem que precisam aprender, mas estao perdidas em excesso de informacao.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Para elas, o valor esta em direcao simples e proximo passo claro.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">sobrecarga, organizacao, direcao, simplicidade, passo</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Conducao por perfil</span>
-            <span class="text-neutral-500 text-sm ml-2">- Nao ensinar igual para todos</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Uma boa sessao cria pontos de entrada diferentes sem perder unidade.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Essa habilidade aumenta aderencia e reduz rejeicao.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">pontos de entrada, aderencia, unidade, rejeicao, didatica</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Uso dos perfis na pratica</span>
-            <span class="text-neutral-500 text-sm ml-2">- Ler a sala para ajustar o discurso</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">O facilitador precisa adaptar exemplos, ritmo e profundidade conforme o perfil predominante.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Sem essa leitura, a sessao pode parecer boa e ainda assim falhar.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">ritmo, exemplos, profundidade, adaptacao, leitura</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">AI</span><div><span class="font-medium">Mudanca de contexto</span><span class="text-neutral-500 text-sm ml-2">- o momento atual</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Uma leitura do mercado em que a IA sai do campo da novidade e entra no campo da adocao estruturada.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem esse contexto, a proposta comercial continua presa em modismos e ferramentas.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Acesso amplo, comoditizacao tecnica, valor na capacidade de uso.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">~</span><div><span class="font-medium">Ondas do mercado</span><span class="text-neutral-500 text-sm ml-2">- do prompt ao enterprise</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A sequencia de ondas: prompts, GPTs, APIs, automacoes, agentes e apps em escala.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mostra que cada camada expande mercado, mas reduz a exclusividade de quem vende so implementacao.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Amplificacao de mercado, reducao de diferencial, aceleracao de maturidade.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">C</span><div><span class="font-medium">Capacidade acima da ferramenta</span><span class="text-neutral-500 text-sm ml-2">- nova vantagem</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A mudanca da conversa: nao basta ter acesso a IA, e preciso operar com criterio, metodo e frequencia.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Reposiciona a oferta para autoridade, continuidade e transformacao real.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Capacidade, repertorio, consistencia, maturidade de uso.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">!</span><div><span class="font-medium">A grande tese</span><span class="text-neutral-500 text-sm ml-2">- educacao e a porta</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A tese de que a capacitacao abre a relacao, mas o negocio real esta na transformacao e no acompanhamento.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Diferencia o PHA 2030 de cursos isolados ou entregas pontuais.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Entrada, confianca, diagnostico, aprofundamento e escala.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">#</span><div><span class="font-medium">Mensagem central</span><span class="text-neutral-500 text-sm ml-2">- o que a turma precisa ouvir</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A formulacao direta: nao estamos montando uma empresa de curso; estamos construindo potencial humano aumentado.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Essa frase organiza narrativa, posicionamento e proposta de valor.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Visao de longo prazo, educacao como meio, autoridade estrategica.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">></span><div><span class="font-medium">Implicacoes praticas</span><span class="text-neutral-500 text-sm ml-2">- como isso muda a oferta</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A traducao da tese para desenho de servicos, conducao de sala e proximo passo comercial.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Evita que a aula termine sem continuidade ou sem leitura de oportunidade.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Posicionamento, desdobramento de servicos, clareza de jornada.</p></div></div></div></div>
       </div>
       <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-        <button onclick="openModal('modal-2-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-700 rounded-lg transition-colors">Ver em Modal</button>
+        <button onclick="openModal('modal-2-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button>
         <a href="modulo-2-1.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
       </div>
     </div>
-  
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
-      <div class="p-6 border-b border-dark-600">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-blue-400 font-bold">2.2</span>
-          <span class="text-xs text-neutral-500">~35 min</span>
-        </div>
-        <h3 class="text-2xl font-bold mb-2">Discovery antes da entrega</h3>
-        <p class="text-neutral-400 text-sm">As perguntas que precisam ser respondidas antes de qualquer workshop ou demonstracao.</p>
-      </div>
-      <div class="divide-y divide-dark-600">
-        
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Onde a maioria esta</span>
-            <span class="text-neutral-500 text-sm ml-2">- Publico 101 ou 301</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Mapear o nivel medio da sala evita erros de profundidade.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Isso protege a sessao de parecer basica demais ou distante demais.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">nivel, maioria, profundidade, 101, 301</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Grande aha moment</span>
-            <span class="text-neutral-500 text-sm ml-2">- Qual demonstracao faria valer a sessao</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">O aha moment precisa ser reconhecivel e ligado a uma necessidade real.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Sem isso, a aula pode ficar bonita e irrelevante.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">aha moment, relevancia, necessidade, valor, percepcao</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Quem sao os ceticos</span>
-            <span class="text-neutral-500 text-sm ml-2">- Tipo e origem da resistencia</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Entender se a resistencia e tecnica, cultural ou emocional muda completamente a abordagem.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Essa leitura melhora a chance de destravar a adesao.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">resistencia, tecnica, cultural, emocional, adesao</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Tarefas mais dolorosas</span>
-            <span class="text-neutral-500 text-sm ml-2">- A dor deve orientar a demo</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">As tarefas mais manuais, lentas ou confusas sao a melhor materia-prima para demonstracao.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">A demo certa nasce da dor mais reconhecivel da sala.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">dor, tarefas, demo, relevancia, reconhecimento</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Sequencia do discovery</span>
-            <span class="text-neutral-500 text-sm ml-2">- Entender antes de montar slides</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">O processo deve comecar pela investigacao, nao pela estetica da apresentacao.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Esse e um dos diferenciais metodologicos do PHA 2030.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">investigacao, slides, metodo, sequencia, preparo</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Saidas do discovery</span>
-            <span class="text-neutral-500 text-sm ml-2">- Hipotese de sessao e proximo passo</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">O discovery bem feito gera recorte de publico, demonstracao priorizada e proposta de continuidade.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Ele e ponte entre conversa inicial e entrega relevante.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">hipotese, publico, demonstracao, proposta, continuidade</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      </div>
-      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-        <button onclick="openModal('modal-2-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-700 rounded-lg transition-colors">Ver em Modal</button>
-        <a href="modulo-2-2.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
-      </div>
-    </div>
-  
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
-      <div class="p-6 border-b border-dark-600">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-blue-400 font-bold">2.3</span>
-          <span class="text-xs text-neutral-500">~35 min</span>
-        </div>
-        <h3 class="text-2xl font-bold mb-2">Como criar o aha moment</h3>
-        <p class="text-neutral-400 text-sm">Critrios para montar demonstracoes reconheciveis e realmente uteis.</p>
-      </div>
-      <div class="divide-y divide-dark-600">
-        
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Aha moment nao e show</span>
-            <span class="text-neutral-500 text-sm ml-2">- Reconhecimento supera sofisticacao</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">O aha moment acontece quando a pessoa reconhece utilidade imediata e concreta.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Isso vale mais do que uma demo tecnicamente impressionante e distante.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">reconhecimento, utilidade, demo, sofisticacao, distancia</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Escolha da dor</span>
-            <span class="text-neutral-500 text-sm ml-2">- Comecar pelo gargalo</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">A melhor demonstracao nasce do gargalo que mais incomoda a sala.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Essa decisao aumenta adesao e acelera entendimento do valor.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">gargalo, sala, adesao, valor, decisao</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Formato da demonstracao</span>
-            <span class="text-neutral-500 text-sm ml-2">- Transformar caos em clareza</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Boas demos resumem, estruturam, organizam e apoiam decisao.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Elas mostram como IA reduz friccao no trabalho real.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">resumo, estrutura, decisao, friccao, clareza</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Dosagem de complexidade</span>
-            <span class="text-neutral-500 text-sm ml-2">- Simplicidade e melhor que excesso</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">A demo deve ser simples o bastante para ser replicavel e forte o bastante para parecer relevante.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Complexidade excessiva assusta e reduz transferencia.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">simplicidade, replicacao, complexidade, transferencia, clareza</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Narrativa da demo</span>
-            <span class="text-neutral-500 text-sm ml-2">- Antes, durante e depois</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Uma boa demonstracao enquadra o problema, mostra o uso e fecha com aplicacao pratica.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Essa narrativa ajuda a mover a pessoa da curiosidade para a capacidade.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">narrativa, problema, uso, aplicacao, capacidade</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Pos-demo</span>
-            <span class="text-neutral-500 text-sm ml-2">- Conectar com criterio e proximo passo</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Depois da demo, e preciso explicar onde usar, quando usar e como comecar.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Esse fechamento impede que o efeito morra no encantamento.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">criterio, proximo passo, aplicacao, fechamento, encantamento</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      </div>
-      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-        <button onclick="openModal('modal-2-3')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-700 rounded-lg transition-colors">Ver em Modal</button>
-        <a href="modulo-2-3.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
-      </div>
-    </div>
-  
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
-      <div class="p-6 border-b border-dark-600">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-blue-400 font-bold">2.4</span>
-          <span class="text-xs text-neutral-500">~35 min</span>
-        </div>
-        <h3 class="text-2xl font-bold mb-2">Estrutura de aula e workshop</h3>
-        <p class="text-neutral-400 text-sm">Como organizar uma sessao de alto impacto do enquadramento ao fechamento.</p>
-      </div>
-      <div class="divide-y divide-dark-600">
-        
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Bloco de mentalidade</span>
-            <span class="text-neutral-500 text-sm ml-2">- Reposicionar a conversa</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">A abertura mostra que IA nao e apenas hype nem ameaca automatica.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Esse enquadramento prepara o terreno para os blocos seguintes.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">mentalidade, abertura, hype, ameaca, enquadramento</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Bloco de diagnostico</span>
-            <span class="text-neutral-500 text-sm ml-2">- Nomear a realidade atual</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Sobrecarga, retrabalho e lentidao precisam ser reconhecidos pela turma.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Sem esse bloco, a sessao tende a ficar abstrata.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">diagnostico, sobrecarga, retrabalho, lentidao, abstracao</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Bloco de visao de futuro</span>
-            <span class="text-neutral-500 text-sm ml-2">- Apresentar o outro lado do portal</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Aqui o grupo enxerga como seria operar com mais clareza, autonomia e performance.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Essa visao cria contraste e desejo de avancar.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">futuro, contraste, autonomia, performance, visao</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Bloco de demo pratica</span>
-            <span class="text-neutral-500 text-sm ml-2">- Provar valor</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">A demonstracao conecta a dor com uma aplicacao visivel e util.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Ela funciona como prova de possibilidade.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">prova, possibilidade, dor, valor, aplicacao</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Bloco de aplicacao</span>
-            <span class="text-neutral-500 text-sm ml-2">- Onde usar e onde nao usar</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">Esse momento converte impacto em criterio.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Sem aplicacao orientada, a sessao perde transferibilidade.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">aplicacao, criterio, transferibilidade, uso, limite</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      <div class="topic-item">
-        <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
-          <span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
-          <span class="text-lg">•</span>
-          <div>
-            <span class="font-medium">Bloco de proximos passos</span>
-            <span class="text-neutral-500 text-sm ml-2">- Encerrar com direcao</span>
-          </div>
-        </button>
-        <div class="topic-explanation hidden px-6 pb-4">
-          <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
-            <div>
-              <span class="text-blue-400 font-semibold">O que e:</span>
-              <p class="text-neutral-300 text-sm">A experiencia precisa terminar com um caminho claro para os proximos dias.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Por que aprender:</span>
-              <p class="text-neutral-300 text-sm">Esse passo reforca autonomia e continuidade.</p>
-            </div>
-            <div>
-              <span class="text-blue-400 font-semibold">Conceitos-chave:</span>
-              <p class="text-neutral-300 text-sm">direcao, continuidade, autonomia, fechamento, proximo passo</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-      </div>
-      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
-        <button onclick="openModal('modal-2-4')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-700 rounded-lg transition-colors">Ver em Modal</button>
-        <a href="modulo-2-4.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a>
-      </div>
-    </div>
-  
-        </section>
 
-        <section class="flex justify-start space-x-3">
-          <a href="../trilha1/index.html" class="px-4 py-2 text-sm bg-dark-700 hover:bg-dark-600 rounded-lg transition-colors">Trilha anterior</a>
-          <a href="../trilha3/index.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Proxima trilha</a>
-        </section>
-      </main>
-      
-      <div id="modal-2-1" class="fixed inset-0 z-[60] hidden">
-        <div class="absolute inset-0 bg-black/70" onclick="closeModal('modal-2-1')"></div>
-        <div class="relative max-w-6xl mx-auto mt-10 h-[85vh] px-4">
-          <div class="bg-dark-900 border border-dark-600 rounded-2xl h-full overflow-hidden">
-            <div class="flex items-center justify-between px-4 py-3 border-b border-dark-600">
-              <div>
-                <div class="text-sm text-neutral-500">Modulo 2.1</div>
-                <div class="font-semibold">Os quatro perfis da sala</div>
-              </div>
-              <button onclick="closeModal('modal-2-1')" class="px-3 py-2 text-sm bg-dark-700 hover:bg-dark-600 rounded-lg">Fechar</button>
-            </div>
-            <iframe src="modulo-2-1.html" class="w-full h-[calc(85vh-57px)] bg-white"></iframe>
-          </div>
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.2</span><span class="text-xs text-neutral-500">~30 min</span></div><h3 class="text-2xl font-bold mb-2">Educacao como porta</h3><p class="text-neutral-400 text-sm">A capacitacao como inicio de uma jornada de clareza, confianca e transformacao.</p></div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">O</span><div><span class="font-medium">Treinamento nao e fim</span><span class="text-neutral-500 text-sm ml-2">- e ponto de entrada</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A ideia de que workshops e aulas abrem espaco, mas precisam se conectar a diagnostico e continuidade.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Evita vender uma experiencia isolada sem efeito duradouro no comportamento.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Entrada, continuidade, ganho de confianca, proxima conversa.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">+</span><div><span class="font-medium">Da curiosidade a capacidade</span><span class="text-neutral-500 text-sm ml-2">- transicao desejada</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A passagem do interesse inicial para o uso consciente e replicavel da IA.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ajuda a montar experiencias com ganhos reais, em vez de deslumbramento superficial.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Curiosidade, repeticao, seguranca, clareza de aplicacao.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">?</span><div><span class="font-medium">Por que cursos isolados falham</span><span class="text-neutral-500 text-sm ml-2">- limite da exposicao unica</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Uma critica ao modelo em que a pessoa entende o conceito, mas nao muda rotina nem processo.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Explica por que tanta capacitacao gera interesse rapido e pouco efeito duradouro.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Entusiasmo sem rotina, ausencia de criterio, falta de acompanhamento.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">=</span><div><span class="font-medium">Formula de transformacao</span><span class="text-neutral-500 text-sm ml-2">- educar, diagnosticar, acompanhar</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">O encadeamento que liga capacitacao, diagnostico, consultoria e cultura organizacional.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Oferece um modelo comercial e pedagogico mais robusto do que vender aula avulsa.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Abertura, leitura de gargalo, evolucao da relacao, escala.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">*</span><div><span class="font-medium">Mensagem para a sala</span><span class="text-neutral-500 text-sm ml-2">- o negocio real</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A formulacao pedagogica de que a educacao abre a porta, mas a transformacao e a proposta real.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Diz ao aluno e ao cliente como devem interpretar a experiencia que esta sendo oferecida.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Tese central, framing, clareza de promessa.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">></span><div><span class="font-medium">Como conduzir esse bloco</span><span class="text-neutral-500 text-sm ml-2">- aplicacao em aula</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Uma orientacao para abrir a aula com reposicionamento, nao com lista de ferramentas.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A primeira leitura molda a qualidade de tudo o que vem depois.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Mudanca de mentalidade, framing, abertura com direcao.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3"><button onclick="openModal('modal-2-2')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button><a href="modulo-2-2.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a></div>
+    </div>
+
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.3</span><span class="text-xs text-neutral-500">~28 min</span></div><h3 class="text-2xl font-bold mb-2">O que e transformacao</h3><p class="text-neutral-400 text-sm">A definicao pratica de transformacao em pessoas, equipes e empresas.</p></div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">P</span><div><span class="font-medium">Pessoa transformada</span><span class="text-neutral-500 text-sm ml-2">- autonomia e criterio</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A pessoa que sabe quando usar, quando nao usar e como avaliar qualidade com mais autonomia.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mostra que transformacao vai alem de conhecer interface e comandos.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Criterio, autonomia, reducao de friccao, velocidade com clareza.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">E</span><div><span class="font-medium">Equipe transformada</span><span class="text-neutral-500 text-sm ml-2">- fluxo real e repeticao</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Uma equipe que incorpora IA em fluxos reais, compartilha boas praticas e aprende com repeticao.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A mudanca de impacto acontece quando o comportamento deixa de ser isolado.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Fluxo, colaboracao, padrao, aprendizagem continua.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">O</span><div><span class="font-medium">Empresa transformada</span><span class="text-neutral-500 text-sm ml-2">- cultura e processo</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A organizacao que conecta lideranca, operacao, criterio de uso e resultado de negocio.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Eleva a conversa de ferramenta para maturidade interna e vantagem real.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cultura, alinhamento, maturidade, conexao com performance.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">M</span><div><span class="font-medium">Maturidade acima do hype</span><span class="text-neutral-500 text-sm ml-2">- o centro muda</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A troca de foco da ferramenta para repertorio, metodo e confianca operacional.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Evita promessas superficiais e ancora a proposta em mudanca sustentavel.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Capacidade, maturidade, uso consistente, qualidade de decisao.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">R</span><div><span class="font-medium">Resultados observaveis</span><span class="text-neutral-500 text-sm ml-2">- sinais de avancos</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Indicadores praticos como reducao de retrabalho, aumento de autonomia e mais clareza nas decisoes.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ajuda a mostrar valor sem depender de discurso abstrato.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Autonomia, produtividade, menos friccao, melhor performance.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">F</span><div><span class="font-medium">Frase de ancoragem</span><span class="text-neutral-500 text-sm ml-2">- linguagem que fixa</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A frase que resume a proposta: construir capacidade humana e organizacional para a era da inteligencia aplicada.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Boa formulacao acelera entendimento, memoria e posicionamento comercial.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Clareza verbal, sintese, alinhamento de narrativa.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3"><button onclick="openModal('modal-2-3')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button><a href="modulo-2-3.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a></div>
+    </div>
+
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.4</span><span class="text-xs text-neutral-500">~26 min</span></div><h3 class="text-2xl font-bold mb-2">Posicionamento PHA 2030</h3><p class="text-neutral-400 text-sm">Como apresentar a proposta de valor com clareza, densidade e relevancia comercial.</p></div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">N</span><div><span class="font-medium">Nome e significado</span><span class="text-neutral-500 text-sm ml-2">- potencial humano aumentado</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A base verbal do PHA 2030, que coloca ampliacao de capacidade no centro da proposta.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O nome deixa de ser sigla vazia e passa a carregar promessa e direcao.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Potencial, humano, ampliacao, IA como meio.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">V</span><div><span class="font-medium">Proposta verbal</span><span class="text-neutral-500 text-sm ml-2">- como apresentar</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">As frases de apresentacao que conectam adocao de IA com cultura, capacidade e performance.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ajuda a comunicar valor sem cair em jargao tecnico ou promessa vaga.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Formula verbal, sintese comercial, consistencia de mensagem.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">F</span><div><span class="font-medium">Formula comercial</span><span class="text-neutral-500 text-sm ml-2">- problema, oportunidade, proposta</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Uma estrutura comercial simples: problema atual, oportunidade, proposta e resultado esperado.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Organiza pitch, aula, proposta de servico e conversa de discovery.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Excesso, lentidao, alavanca, capacitacao, diagnostico, performance.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">T</span><div><span class="font-medium">Transformar confusao em clareza</span><span class="text-neutral-500 text-sm ml-2">- eixo narrativo</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">O conjunto de frases que descreve as passagens centrais do programa: curiosidade em capacidade e conhecimento em performance.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Diferencia o discurso do curso tradicional e do fornecedor operacional.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Clareza, capacidade, cultura, performance, transformacao.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">S</span><div><span class="font-medium">Sinais de autoridade</span><span class="text-neutral-500 text-sm ml-2">- como ser percebido</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Elementos que fazem o profissional sair da imagem de executor e entrar no lugar de referencia.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Posicionamento percebido afeta ticket, escopo e qualidade da relacao com o cliente.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Leitura estrategica, diagnostico, acompanhamento, confianca.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">L</span><div><span class="font-medium">Linguagem para reunioes</span><span class="text-neutral-500 text-sm ml-2">- pitch curto e longo</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A traducao do posicionamento para fala de reuniao, palestra e proposta comercial.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Coerencia verbal aumenta clareza, gera previsibilidade e reduz ruido na venda.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Pitch, consistencia, repertorio verbal, argumento central.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3"><button onclick="openModal('modal-2-4')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button><a href="modulo-2-4.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a></div>
+    </div>
+
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.5</span><span class="text-xs text-neutral-500">~30 min</span></div><h3 class="text-2xl font-bold mb-2">Execucao versus habilitacao</h3><p class="text-neutral-400 text-sm">Por que vender so entrega tecnica limita posicionamento, margem e impacto.</p></div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">E</span><div><span class="font-medium">Problema do modelo antigo</span><span class="text-neutral-500 text-sm ml-2">- vender so projeto</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Um modelo baseado em desenvolvimento, retrabalho, manutencao e dependencia do escopo tecnico.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Nomeia limites que costumam ser aceitos como normais por quem trabalha so na camada de execucao.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Projeto, escopo confuso, manutencao, dependencia, fornecedor.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">H</span><div><span class="font-medium">Vantagem da habilitacao</span><span class="text-neutral-500 text-sm ml-2">- entrar como parceiro</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">O modelo em que voce educa, cria confianca, identifica gargalos e amplia autoridade antes da implementacao.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Muda a percepcao do cliente e abre portas mais estrategicas na organizacao.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Parceiro, educacao, autoridade, recorrencia, melhor porta de entrada.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">R</span><div><span class="font-medium">Receita recorrente</span><span class="text-neutral-500 text-sm ml-2">- continuidade com menos desgaste</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A possibilidade de combinar capacitacao, auditoria, consultoria e acompanhamento em um desenho mais estavel.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Aumenta valor percebido, previsibilidade e profundidade da relacao com o cliente.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Recorrencia, evolucao da oferta, menos desgaste operacional.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">A</span><div><span class="font-medium">Autoridade e referencia</span><span class="text-neutral-500 text-sm ml-2">- lugar que voce ocupa</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A troca de papel: de fornecedor tatico para referencia que ajuda a pensar, priorizar e evoluir.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">O modo como voce entra define o tipo de conversa que sera possivel depois.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Referencia, confianca, leitura de negocio, influencia interna.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">X</span><div><span class="font-medium">Friccao comercial menor</span><span class="text-neutral-500 text-sm ml-2">- entrada mais inteligente</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Usar a capacitacao para gerar confianca antes de propor mudancas mais amplas ou projetos aplicados.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Reduz resistencia inicial e melhora a qualidade do diagnostico posterior.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Entrada leve, confianca, prova de valor, continuidade comercial.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">F</span><div><span class="font-medium">Frase de fechamento</span><span class="text-neutral-500 text-sm ml-2">- quem habilita vira referencia</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A sintese verbal do modulo: quem so executa vira fornecedor; quem habilita vira referencia.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Frases fortes organizam memoria e orientam a tomada de decisao sobre posicionamento.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Fornecedor versus referencia, sintese, clareza estrategica.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3"><button onclick="openModal('modal-2-5')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button><a href="modulo-2-5.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a></div>
+    </div>
+
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.6</span><span class="text-xs text-neutral-500">~28 min</span></div><h3 class="text-2xl font-bold mb-2">Os 4 perfis da sala</h3><p class="text-neutral-400 text-sm">Uma boa sessao nao ensina igual para todos; ela cria pontos de entrada para perfis diferentes.</p></div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">C</span><div><span class="font-medium">Ceticos</span><span class="text-neutral-500 text-sm ml-2">- medo, resistencia, defesa</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">O perfil que rejeita ou teme IA por substituicao, qualidade, seguranca ou saturacao com hype.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem ler esse estado emocional, a sessao perde adesao logo no inicio.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Validacao, concretude, utilidade, respeito a preocupacoes reais.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">H</span><div><span class="font-medium">Champions</span><span class="text-neutral-500 text-sm ml-2">- aliados internos</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Quem ja acredita no potencial da IA e pode virar ponte para continuidade da iniciativa.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Bem usados, ajudam a sustentar energia; mal usados, podem dominar a conversa.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Aliado, multiplicador, ponte, equilibrio de participacao.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">I</span><div><span class="font-medium">Iniciantes empolgados</span><span class="text-neutral-500 text-sm ml-2">- energia alta, base baixa</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">O publico com curiosidade intensa e estrutura ainda fragil para sustentar aprofundamento tecnico.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Esse grupo precisa de vitoria rapida para nao perder confianca no processo.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Simplificacao, ganho rapido, suporte, progressao gradual.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">S</span><div><span class="font-medium">Sobrecarregados</span><span class="text-neutral-500 text-sm ml-2">- excesso de informacao</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Pessoas que sabem que precisam aprender, mas estao confusas, cansadas e sem criterio de priorizacao.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Esse perfil nao precisa de mais conteudo; precisa de organizacao do caminho.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Reducao de complexidade, proximo passo, clareza, sequenciamento.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">D</span><div><span class="font-medium">Design da sessao</span><span class="text-neutral-500 text-sm ml-2">- ensinar para varios estados</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">Uma estrategia de conduzir a sessao com linguagem, exemplos e ritmo que atendam perfis distintos.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A diversidade de estados humanos define adesao mais do que a quantidade de conteudo exibido.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Pontos de entrada, leitura emocional, adaptacao, conducao.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">F</span><div><span class="font-medium">Frase para usar em aula</span><span class="text-neutral-500 text-sm ml-2">- uma boa sessao...</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A frase de orientacao: uma boa sessao nao ensina igual para todos; ela cria pontos de entrada para perfis diferentes.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Serve como criterio para revisar didatica, demo e ritmo da aula.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Adaptacao, inclusao pedagogica, relevancia, desenho de experiencia.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3"><button onclick="openModal('modal-2-6')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button><a href="modulo-2-6.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a></div>
+    </div>
+
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.7</span><span class="text-xs text-neutral-500">~30 min</span></div><h3 class="text-2xl font-bold mb-2">Discovery e aha moment</h3><p class="text-neutral-400 text-sm">As perguntas que conectam a demonstracao a uma dor real e reconhecivel.</p></div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">1</span><div><span class="font-medium">Onde a maioria esta</span><span class="text-neutral-500 text-sm ml-2">- 101 ou 301</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A pergunta que define o nivel de repertorio predominante da sala.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Evita falar acima ou abaixo do nivel real e perder a turma.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Diagnostico de nivel, calibragem, profundidade certa.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">2</span><div><span class="font-medium">Qual seria o aha moment</span><span class="text-neutral-500 text-sm ml-2">- demonstracao que vale a sessao</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A situacao em que a pessoa reconhece utilidade concreta e pensa: isso resolveria algo real para mim.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Aumenta relevancia, adesao e memorabilidade da experiencia.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Reconhecimento, valor percebido, demo util, impacto pratico.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">3</span><div><span class="font-medium">Quem sao os ceticos e por que</span><span class="text-neutral-500 text-sm ml-2">- resistencia especifica</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A pergunta que investiga se a resistencia e tecnica, cultural, emocional ou juridica.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Cada tipo de resistencia exige outra forma de demonstrar valor e seguranca.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Resistencia, conducao, leitura da sala, adaptacao de narrativa.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">4</span><div><span class="font-medium">Quais tarefas doem mais</span><span class="text-neutral-500 text-sm ml-2">- a dor vira demo</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A identificacao das tarefas manuais, lentas, confusas ou repetitivas que merecem virar demonstracao.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">A melhor demo nao e a mais bonita; e a que resolve a dor mais reconhecivel da sala.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Dor reconhecivel, demonstracao util, aderencia, aplicacao.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">D</span><div><span class="font-medium">Discovery antes dos slides</span><span class="text-neutral-500 text-sm ml-2">- ordem correta</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">O principio de que primeiro se entende a realidade da sala; depois se desenha o conteudo.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem discovery, a chance de apresentar algo bonito e irrelevante e alta.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Sequencia correta, diagnostico, relevancia, personalizacao.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">A</span><div><span class="font-medium">Aplicacao em workshops</span><span class="text-neutral-500 text-sm ml-2">- duplas, exercicios e debrief</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">O uso das quatro perguntas em dinamicas de dupla, mapear dores e escolher a melhor demo.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Transforma discovery em pratica de sala, nao apenas conceito abstrato.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Exercicio, compartilhamento, hipotese de demo, leitura coletiva.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3"><button onclick="openModal('modal-2-7')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button><a href="modulo-2-7.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a></div>
+    </div>
+
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600"><div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.8</span><span class="text-xs text-neutral-500">~32 min</span></div><h3 class="text-2xl font-bold mb-2">Jornada, modelo e proximo passo</h3><p class="text-neutral-400 text-sm">Como transformar awareness em scale e ligar o workshop a uma linha comercial continua.</p></div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">J</span><div><span class="font-medium">Jornada de adocao</span><span class="text-neutral-500 text-sm ml-2">- awareness a scale</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">As cinco etapas: awareness, aha moment, capability, independence e scale.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mostra que o objetivo da aula nao e impressionar, e mover a pessoa de curiosa para capaz.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Etapas, progressao, maturidade, evolucao gradual.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">M</span><div><span class="font-medium">Modelo de negocio</span><span class="text-neutral-500 text-sm ml-2">- aula nao e produto final</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A leitura de que a aula inicia o relacionamento e prepara a entrada de diagnostico, trilha e consultoria.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ajuda a desenhar continuidade comercial com mais coerencia e menos atrito.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Entrada, aprofundamento, recorrencia, implementacao quando fizer sentido.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">E</span><div><span class="font-medium">Estrutura de workshop</span><span class="text-neutral-500 text-sm ml-2">- abertura ao fechamento</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A organizacao da experiencia em blocos: enquadramento, diagnostico, perfis, discovery, demo, jornada e fechamento.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Facilita conduzir turmas corporativas com ritmo, clareza e aplicacao pratica.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Agenda, blocos, dinamicas, debrief, oferta de continuidade.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">P</span><div><span class="font-medium">Proximos passos concretos</span><span class="text-neutral-500 text-sm ml-2">- o que fazer em 7 dias</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">As perguntas finais que convertem aprendizagem em acao priorizada no curto prazo.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem proximo passo claro, a experiencia tende a se dissolver em boa intencao.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Prioridade, traducao pratica, compromisso, cadencia inicial.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">C</span><div><span class="font-medium">Chamada para acao</span><span class="text-neutral-500 text-sm ml-2">- operar o futuro</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">O convite para olhar a IA nao como ferramenta isolada, mas como sistema de evolucao de capacidade.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Fecha a experiencia com uma visao coerente de futuro e responsabilidade.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Capacidade, metodo, proposito, redesenho de operacao.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">F</span><div><span class="font-medium">Frase de encerramento</span><span class="text-neutral-500 text-sm ml-2">- preparar humanos</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-blue-400 font-semibold">O que e:</span><p class="text-neutral-300 text-sm">A sintese final: nao estamos ensinando apenas IA; estamos preparando humanos para operar o futuro.</p></div><div><span class="text-blue-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Uma boa conclusao fixa sentido, direcao e identidade do programa.</p></div><div><span class="text-blue-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Encerramento, visao, identidade, proximo horizonte.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3"><button onclick="openModal('modal-2-8')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">Ver em Modal</button><a href="modulo-2-8.html" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Ver Completo</a></div>
+    </div>
+
+    <section class="pt-6">
+      <div class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 rounded-xl border border-blue-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-4">Fechamento da trilha</h2>
+        <p class="text-neutral-300 mb-6 max-w-3xl">
+          Esta trilha organiza a narrativa central do PHA 2030: primeiro mudar a lente, depois ler a sala, conduzir com criterio e abrir a continuidade certa.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="../../index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">Voltar para inicio</a>
+          <a href="modulo-2-1.html" class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors">Comecar pelo modulo 2.1</a>
         </div>
       </div>
-    
-      <div id="modal-2-2" class="fixed inset-0 z-[60] hidden">
-        <div class="absolute inset-0 bg-black/70" onclick="closeModal('modal-2-2')"></div>
-        <div class="relative max-w-6xl mx-auto mt-10 h-[85vh] px-4">
-          <div class="bg-dark-900 border border-dark-600 rounded-2xl h-full overflow-hidden">
-            <div class="flex items-center justify-between px-4 py-3 border-b border-dark-600">
-              <div>
-                <div class="text-sm text-neutral-500">Modulo 2.2</div>
-                <div class="font-semibold">Discovery antes da entrega</div>
-              </div>
-              <button onclick="closeModal('modal-2-2')" class="px-3 py-2 text-sm bg-dark-700 hover:bg-dark-600 rounded-lg">Fechar</button>
-            </div>
-            <iframe src="modulo-2-2.html" class="w-full h-[calc(85vh-57px)] bg-white"></iframe>
-          </div>
-        </div>
-      </div>
-    
-      <div id="modal-2-3" class="fixed inset-0 z-[60] hidden">
-        <div class="absolute inset-0 bg-black/70" onclick="closeModal('modal-2-3')"></div>
-        <div class="relative max-w-6xl mx-auto mt-10 h-[85vh] px-4">
-          <div class="bg-dark-900 border border-dark-600 rounded-2xl h-full overflow-hidden">
-            <div class="flex items-center justify-between px-4 py-3 border-b border-dark-600">
-              <div>
-                <div class="text-sm text-neutral-500">Modulo 2.3</div>
-                <div class="font-semibold">Como criar o aha moment</div>
-              </div>
-              <button onclick="closeModal('modal-2-3')" class="px-3 py-2 text-sm bg-dark-700 hover:bg-dark-600 rounded-lg">Fechar</button>
-            </div>
-            <iframe src="modulo-2-3.html" class="w-full h-[calc(85vh-57px)] bg-white"></iframe>
-          </div>
-        </div>
-      </div>
-    
-      <div id="modal-2-4" class="fixed inset-0 z-[60] hidden">
-        <div class="absolute inset-0 bg-black/70" onclick="closeModal('modal-2-4')"></div>
-        <div class="relative max-w-6xl mx-auto mt-10 h-[85vh] px-4">
-          <div class="bg-dark-900 border border-dark-600 rounded-2xl h-full overflow-hidden">
-            <div class="flex items-center justify-between px-4 py-3 border-b border-dark-600">
-              <div>
-                <div class="text-sm text-neutral-500">Modulo 2.4</div>
-                <div class="font-semibold">Estrutura de aula e workshop</div>
-              </div>
-              <button onclick="closeModal('modal-2-4')" class="px-3 py-2 text-sm bg-dark-700 hover:bg-dark-600 rounded-lg">Fechar</button>
-            </div>
-            <iframe src="modulo-2-4.html" class="w-full h-[calc(85vh-57px)] bg-white"></iframe>
-          </div>
-        </div>
-      </div>
-    
-    
-  <footer class="border-t border-dark-600 py-8 mt-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-sm text-neutral-500">
-      PHA 2030 | Preparar humanos para operar o futuro.
+    </section>
+  </main>
+
+  <div id="modal-2-1" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.1</span><span class="font-semibold">Panorama e mudanca de fase</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-1.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+  <div id="modal-2-2" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.2</span><span class="font-semibold">Educacao como porta</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-2.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+  <div id="modal-2-3" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.3</span><span class="font-semibold">O que e transformacao</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-3.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+  <div id="modal-2-4" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.4</span><span class="font-semibold">Posicionamento PHA 2030</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-4.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+  <div id="modal-2-5" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.5</span><span class="font-semibold">Execucao versus habilitacao</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-5.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+  <div id="modal-2-6" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.6</span><span class="font-semibold">Os 4 perfis da sala</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-6.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+  <div id="modal-2-7" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.7</span><span class="font-semibold">Discovery e aha moment</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-7.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+  <div id="modal-2-8" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()"><div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600"><div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.8</span><span class="font-semibold">Jornada, modelo e proximo passo</span></div><button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button></div><iframe src="modulo-2-8.html" class="flex-1 w-full rounded-b-xl"></iframe></div></div>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>PHA 2030 - 2026</p>
     </div>
   </footer>
+
   <script>
     function toggleTopic(button) {
-      const current = button.parentElement;
-      const container = current.parentElement;
-      const explanation = current.querySelector('.topic-explanation');
-      const items = container.querySelectorAll('.topic-item .topic-explanation');
-      items.forEach((item) => {
-        if (item !== explanation) item.classList.add('hidden');
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
       });
-      explanation.classList.toggle('hidden');
+      explanation.classList.toggle('active');
     }
 
-    function openModal(id) {
-      const modal = document.getElementById(id);
-      if (modal) modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal(id) {
-      const modal = document.getElementById(id);
-      if (modal) modal.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        document.querySelectorAll('[id^="modal-"]').forEach((modal) => modal.classList.add('hidden'));
-        document.body.style.overflow = '';
-      }
-    });
-
-    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggle = document.getElementById('theme-toggle');
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-    const isDark = () => document.documentElement.classList.contains('dark');
-    const syncIcons = () => {
-      themeToggleDarkIcon.classList.toggle('hidden', !isDark());
-      themeToggleLightIcon.classList.toggle('hidden', isDark());
-    };
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') document.documentElement.classList.remove('dark');
-    if (savedTheme === 'dark') document.documentElement.classList.add('dark');
-    syncIcons();
-    themeToggleBtn.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', isDark() ? 'dark' : 'light');
-      syncIcons();
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal() {
+      document.querySelectorAll('.modal').forEach(modal => modal.classList.add('hidden'));
+      document.body.style.overflow = 'auto';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
     });
   </script>
 </body>
