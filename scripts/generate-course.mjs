@@ -428,6 +428,7 @@ function renderModulePage(trail, module) {
   const moduleIndex = trail.modules.findIndex((item) => item.id === module.id);
   const nextModule = trail.modules[moduleIndex + 1];
   const moduleNarrative = getModuleNarrative(module.id);
+  const moduleStyle = getModuleStyle(module.id);
 
   const sections = module.topics
     .map((item, index) => {
@@ -443,33 +444,33 @@ function renderModulePage(trail, module) {
         </div>
 
         <div class="space-y-6">
-          <div class="rounded-2xl border ${color.border} bg-gradient-to-br ${color.grad} to-transparent p-6">
-            <h3 class="text-lg font-semibold ${color.text} mb-2">Conceito principal</h3>
+          <div class="${moduleStyle.primaryBoxClass} rounded-2xl border ${color.border} bg-gradient-to-br ${color.grad} to-transparent p-6">
+            <h3 class="text-lg font-semibold ${color.text} mb-2">${moduleStyle.coreTitle}</h3>
             <p class="text-neutral-300 mb-4">${detail.core[0]}</p>
             <p class="text-neutral-300">${detail.core[1]}</p>
           </div>
 
-          <div class="rounded-2xl border border-blue-500/30 bg-blue-500/10 p-6">
-            <h3 class="text-lg font-semibold text-blue-400 mb-2">Leitura aprofundada</h3>
+          <div class="${moduleStyle.contextBoxClass} rounded-2xl border border-blue-500/30 bg-blue-500/10 p-6">
+            <h3 class="text-lg font-semibold text-blue-400 mb-2">${moduleStyle.contextTitle}</h3>
             <p class="text-neutral-300 mb-4">${detail.context[0]}</p>
             <p class="text-neutral-300">${detail.context[1]}</p>
           </div>
 
-          <div class="rounded-2xl border border-primary/40 bg-primary/10 p-6">
-            <h3 class="text-lg font-semibold text-primary mb-2">Exemplo orientado</h3>
+          <div class="${moduleStyle.exampleBoxClass} rounded-2xl border border-primary/40 bg-primary/10 p-6">
+            <h3 class="text-lg font-semibold text-primary mb-2">${moduleStyle.exampleTitle}</h3>
             <p class="text-neutral-300 mb-4">${detail.example[0]}</p>
             <p class="text-neutral-300">${detail.example[1]}</p>
           </div>
 
-          <div class="rounded-2xl border border-dark-600 bg-dark-800 p-6">
-            <h3 class="text-lg font-semibold mb-3">Como ensinar ou aplicar este topico</h3>
+          <div class="${moduleStyle.stepsBoxClass} rounded-2xl border border-dark-600 bg-dark-800 p-6">
+            <h3 class="text-lg font-semibold mb-3">${moduleStyle.stepsTitle}</h3>
             <div class="space-y-4 text-neutral-300">
               ${detail.steps.map((step, stepIndex) => `<div><span class="${color.text} font-semibold">${stepIndex + 1}.</span> ${step}</div>`).join('')}
             </div>
           </div>
 
-          <div class="rounded-2xl border border-dark-600 bg-dark-800 p-6">
-            <h3 class="text-lg font-semibold mb-3">Explicacao detalhada</h3>
+          <div class="${moduleStyle.deepDiveBoxClass} rounded-2xl border border-dark-600 bg-dark-800 p-6">
+            <h3 class="text-lg font-semibold mb-3">${moduleStyle.deepDiveTitle}</h3>
             <div class="space-y-4 text-neutral-300">
               ${detail.deepDive.map((paragraph) => `<p>${paragraph}</p>`).join('')}
             </div>
@@ -492,15 +493,15 @@ function renderModulePage(trail, module) {
             </div>
           </div>
 
-          <div class="rounded-2xl border border-dark-600 bg-dark-800 p-6">
-            <h3 class="text-lg font-semibold mb-3">Perguntas de reflexao</h3>
+          <div class="${moduleStyle.reflectionBoxClass} rounded-2xl border border-dark-600 bg-dark-800 p-6">
+            <h3 class="text-lg font-semibold mb-3">${moduleStyle.reflectionTitle}</h3>
             <div class="space-y-3 text-neutral-300">
               ${detail.reflection.map((question) => `<p>${question}</p>`).join('')}
             </div>
           </div>
 
-          <div class="rounded-2xl border border-dark-600 bg-dark-800 p-6">
-            <h3 class="text-lg font-semibold mb-3">Conceitos-chave para memorizar</h3>
+          <div class="${moduleStyle.summaryBoxClass} rounded-2xl border border-dark-600 bg-dark-800 p-6">
+            <h3 class="text-lg font-semibold mb-3">${moduleStyle.summaryTitle}</h3>
             <p class="text-neutral-300 mb-4">${item.key}</p>
             <p class="text-neutral-300">${detail.closing}</p>
           </div>
@@ -542,8 +543,8 @@ function renderModulePage(trail, module) {
 
       <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         ${moduleNarrative?.intro ? `
-        <section class="mb-16 rounded-2xl border ${color.border} bg-dark-800 p-8">
-          <h2 class="text-2xl font-bold mb-4">Leitura de abertura</h2>
+        <section class="mb-16 rounded-2xl border ${color.border} ${moduleStyle.introBoxClass} p-8">
+          <h2 class="text-2xl font-bold mb-4">${moduleStyle.introTitle}</h2>
           <div class="space-y-4 text-neutral-300">
             ${moduleNarrative.intro.map((paragraph) => `<p>${paragraph}</p>`).join('')}
           </div>
@@ -551,7 +552,7 @@ function renderModulePage(trail, module) {
         ${sections}
 
         <section class="rounded-2xl border ${color.border} bg-gradient-to-br ${color.grad} to-transparent p-8">
-          <h2 class="text-2xl font-bold mb-4">Resumo final</h2>
+          <h2 class="text-2xl font-bold mb-4">${moduleStyle.finalTitle}</h2>
           <div class="grid md:grid-cols-2 gap-4 mb-6">
             ${module.topics
               .slice(0, 4)
@@ -573,6 +574,18 @@ function buildTopicDetail(trail, module, item, index) {
   const customTopic = getModuleNarrative(module.id)?.topics?.[index];
   if (customTopic) {
     return customTopic;
+  }
+
+  if (module.id === '1.2') {
+    return buildEducationDoorDetail(item);
+  }
+
+  if (module.id === '1.3') {
+    return buildPotentialHumanDetail(item);
+  }
+
+  if (module.id === '1.4') {
+    return buildEnableVsExecuteDetail(item);
   }
 
   const keywords = item.key.split(',').map((value) => value.trim()).filter(Boolean);
@@ -622,6 +635,200 @@ function buildTopicDetail(trail, module, item, index) {
   const closing = `Memorize este ponto assim: ${item.title} so ganha valor completo quando sai do resumo e entra na explicacao. O objetivo do modulo nao e apenas informar, mas dar repertorio suficiente para analisar, ensinar e aplicar o tema com seguranca.`;
 
   return { opening, core, context, example, steps, deepDive, avoid, reflection, closing };
+}
+
+function buildEducationDoorDetail(item) {
+  const keywords = item.key.split(',').map((value) => value.trim()).filter(Boolean);
+  const opening = `${item.subtitle}. ${item.what} Aqui a intencao e mostrar por que a capacitacao precisa ser vista como inicio de relacionamento, clareza e diagnostico, e nao como entrega isolada.`;
+  const core = [
+    `${item.what} No PHA 2030, isso significa reposicionar o ensino: a aula deixa de ser produto terminal e passa a funcionar como mecanismo de entrada, alinhamento e abertura de confianca.`,
+    `Quando esse topico e bem compreendido, o aluno percebe que ensinar IA nao e apenas transferir informacao. E criar linguagem comum, reduzir friccao e preparar terreno para uma conversa mais madura sobre mudanca real.`,
+  ];
+  const context = [
+    `${item.why} O ponto critico aqui e que treinamento sem continuidade costuma produzir entusiasmo passageiro. A pessoa gosta, a equipe comenta, mas a rotina nao muda e a organizacao nao amadurece.`,
+    `Por isso, este modulo trata educacao como porta: a sessao boa gera clareza, revela dores, indica prontidao e melhora muito a qualidade de qualquer etapa posterior de discovery, auditoria ou consultoria.`,
+  ];
+  const example = [
+    `Imagine uma empresa que pede um workshop porque sente que ficou para tras. Se voce entra apenas para dar uma aula de ferramentas, a conversa termina junto com o encontro. Se voce usa ${item.title.toLowerCase()} como lente, a sessao vira primeiro passo de uma jornada: ensina, escuta, revela gargalos e abre espaco para aprofundamento.`,
+    'Nesse tipo de cena, o mais valioso nao e a quantidade de conteudo despejada. E a capacidade de criar uma base comum a partir da qual lideranca e equipe consigam conversar melhor sobre adocao, capacidade e proximo passo.',
+  ];
+  const steps = [
+    'Comece diferenciando treinamento isolado de capacitacao com destino claro.',
+    'Mostre como a sessao inicial gera confianca, linguagem compartilhada e visibilidade de problemas.',
+    'Feche cada topico apontando qual conversa de continuidade ele habilita depois da aula.',
+  ];
+  const deepDive = [
+    `Se este assunto fosse escrito como capitulo de livro, a primeira tese seria direta: educacao nao perdeu valor, mas precisa ser reposicionada. Em vez de ser vista como fim em si mesma, ela deve ser entendida como camada de entrada para um trabalho mais profundo de transformacao. ${item.title} existe justamente para explicar essa virada.`,
+    'Muitas pessoas ainda associam treinamento a algo pontual, quase ceremonial: um evento, um encontro, uma sensibilizacao. O PHA 2030 nao rejeita essa funcao inicial, mas vai alem. Ele mostra que a aula bem desenhada reduz friccao comercial, melhora a qualidade do diagnostico seguinte e faz a empresa chegar mais preparada para qualquer consultoria ou implementacao.',
+    `Tambem e importante notar que esse topico altera o papel do facilitador. Ele deixa de ser apenas expositor e passa a ser organizador de contexto. Em vez de tentar vencer a reuniao pela quantidade de informacao, ele vence pela qualidade do enquadramento, da escuta e da direcao. E isso muda completamente o valor percebido da sessao.`,
+    `No fechamento, o aluno precisa perceber que ${item.title.toLowerCase()} nao e apenas uma ideia pedagógica. E uma decisao estrategica sobre como entrar, construir confianca e preparar transformacao real a partir do ensino.`,
+  ];
+  const avoid = [
+    `Tratar ${item.title.toLowerCase()} como frase bonita sem mostrar desdobramento relacional e comercial.`,
+    'Confundir profundidade com volume de slides ou excesso de ferramenta.',
+    'Encerrar a aula sem ponte clara para diagnostico, trilha ou acompanhamento.',
+  ];
+  const reflection = [
+    `Minha forma atual de ensinar abre caminho para continuidade ou termina no evento?`,
+    'Quais sinais mostram que uma sessao gerou confianca real e nao apenas interesse momentaneo?',
+    `Como eu transformaria ${item.title.toLowerCase()} em critério de desenho para minhas proximas entregas?`,
+  ];
+  const closing = `Memorize assim: ${item.title} faz a educacao valer mais porque a conecta com relacao, clareza e continuidade. Ensinar bem, aqui, e abrir a porta certa. ${keywords.slice(0, 3).join(', ')} precisam aparecer como ponte, nao como fim.`;
+  return { opening, core, context, example, steps, deepDive, avoid, reflection, closing };
+}
+
+function buildPotentialHumanDetail(item) {
+  const keywords = item.key.split(',').map((value) => value.trim()).filter(Boolean);
+  const opening = `${item.subtitle}. ${item.what} Este modulo existe para deslocar a conversa da ferramenta para a ampliacao concreta de capacidade humana e organizacional.`;
+  const core = [
+    `${item.what} O conceito de Potencial Humano Aumentado e forte porque troca o centro da narrativa. Em vez de celebrar tecnologia pela tecnologia, ele pergunta que tipo de clareza, criterio, autonomia e performance essa tecnologia ajuda a construir.`,
+    `Quando o aluno entende esse enquadramento, ele para de vender novidade tecnica e passa a falar de maturidade, repertorio e capacidade de decisao. Isso deixa o discurso mais humano e mais estrategico ao mesmo tempo.`,
+  ];
+  const context = [
+    `${item.why} Em mercados saturados de ferramentas e promessas, a ideia de capacidade humana reorganiza a conversa. Ela reduz o risco de um discurso mecanico e ajuda a explicar por que a IA so gera valor profundo quando melhora a forma de pensar, decidir e operar.`,
+    `Esse topico tambem protege contra exageros. Potencial Humano Aumentado nao significa dependencia cega da tecnologia; significa uso mais inteligente, mais critico e mais bem situado dentro do trabalho real.`,
+  ];
+  const example = [
+    `Pense em uma equipe que ja experimentou varias ferramentas, mas continua insegura sobre quando confiar, quando revisar e onde encaixar IA na rotina. Ao trabalhar ${item.title.toLowerCase()} como eixo, a conversa deixa de ser "qual ferramenta usar" e passa a ser "que capacidade precisamos ampliar primeiro".`,
+    'Esse deslocamento muda inclusive o tom da aula. O aluno deixa de se sentir pressionado a dominar tudo e comeca a perceber que o objetivo e ganhar clareza, autonomia e criterio progressivamente.',
+  ];
+  const steps = [
+    'Explique sempre que o centro nao e a ferramenta, mas a capacidade ampliada que ela viabiliza.',
+    'Use exemplos que mostrem ganho de clareza, criterio, autonomia ou qualidade, e nao apenas velocidade.',
+    'Costure cada topico com a ideia de maturidade: o que muda em pessoa, equipe e empresa quando a capacidade cresce?',
+  ];
+  const deepDive = [
+    `Como capitulo, este modulo precisa sustentar um conceito-identidade. Potencial Humano Aumentado nao e um slogan decorativo. E a formula que explica por que o PHA 2030 nao quer apenas ensinar uso de IA, mas preparar pessoas para operar um novo tipo de trabalho, decisao e colaboracao.`,
+    'O valor dessa formula esta em recolocar o humano no centro sem cair em rejeicao a tecnologia. O humano continua no centro nao porque a tecnologia seja secundaria, mas porque ela so faz sentido quando amplia repertorio, criterio e autonomia. Esse ponto e decisivo para evitar discursos vazios de inovacao.',
+    `Tambem e por isso que ${item.title.toLowerCase()} precisa ser desenvolvido com calma. O aluno precisa sentir que existe uma mudanca de linguagem, de postura e de ambicao no curso. Nao estamos apenas ensinando o que usar. Estamos ensinando a construir capacidade para avaliar melhor o que usar, por que usar e com que limite usar.`,
+    `No fechamento, a pergunta certa nao e "aprendi mais uma ferramenta?". A pergunta certa e "que capacidade eu consigo ampliar a partir daqui?". Esse e o tipo de mudanca que faz o curso soar mais profundo, menos massante e mais coerente com a proposta do PHA 2030.`,
+  ];
+  const avoid = [
+    `Explicar ${item.title.toLowerCase()} como conceito abstrato demais, sem mostrar mudanca concreta de capacidade.`,
+    'Voltar ao discurso tool-centric logo depois de apresentar o conceito humano.',
+    'Usar exemplos frios demais, que nao mostrem impacto em autonomia, clareza ou criterio.',
+  ];
+  const reflection = [
+    'Que capacidade humana ou organizacional eu mais preciso ampliar hoje?',
+    `Onde meu discurso ainda coloca a ferramenta no centro em vez de ${item.title.toLowerCase()}?`,
+    'Como eu tornaria esse conceito visivel em uma aula, proposta ou diagnostico?',
+  ];
+  const closing = `Memorize assim: ${item.title} vale quando transforma tecnologia em capacidade. ${keywords.slice(0, 3).join(', ')} nao sao aderecos conceituais; sao a base da proposta do curso.`;
+  return { opening, core, context, example, steps, deepDive, avoid, reflection, closing };
+}
+
+function buildEnableVsExecuteDetail(item) {
+  const keywords = item.key.split(',').map((value) => value.trim()).filter(Boolean);
+  const opening = `${item.subtitle}. ${item.what} Este modulo confronta dois modelos de posicionamento e mostra por que habilitar costuma gerar mais autoridade, mais profundidade de relacao e melhor continuidade do que vender execucao isolada.`;
+  const core = [
+    `${item.what} O contraste central aqui e entre um modelo em que o cliente apenas delega e outro em que ele amadurece junto com a entrega. Quando a proposta fica presa a execucao, o valor tende a ficar preso ao entregavel e a relacao tende a se tornar mais tática.`,
+    `Ja quando a proposta comeca pela habilitacao, o profissional ganha outro lugar: passa a organizar contexto, ensinar criterio, revelar gargalos e preparar o terreno para que qualquer implementacao posterior seja mais clara e menos desgastante.`,
+  ];
+  const context = [
+    `${item.why} Essa diferenca nao e apenas comercial. Ela muda a qualidade do trabalho. Modelos centrados so em execucao atraem escopos mais confusos, mais manutencao e mais dependencia. Modelos centrados em habilitacao favorecem alinhamento, autonomia e recorrencia.`,
+    `O PHA 2030 usa esse contraste para mostrar que autoridade nasce menos de parecer o tecnico mais sofisticado da sala e mais de conseguir preparar a sala para pensar melhor, decidir melhor e usar melhor a tecnologia.`,
+  ];
+  const example = [
+    `Imagine uma empresa pedindo "um agente de IA". No caminho da execucao pura, voce vai direto para o entregavel e herda expectativas difusas. No caminho da habilitacao, voce primeiro ajuda a empresa a entender problema, prontidao, limite e objetivo. O projeto seguinte entra muito melhor.`,
+    'Esse tipo de cena deixa claro que habilitar nao substitui executar. Ele reorganiza o momento da execucao e faz com que ela aconteca em ambiente mais maduro, mais lucido e mais valioso.',
+  ];
+  const steps = [
+    'Apresente o custo oculto do modelo centrado apenas em execucao: retrabalho, dependencia e posicionamento de fornecedor.',
+    'Mostre o ganho estrutural do modelo de habilitacao: autoridade, melhor entrada, mais portas internas e continuidade.',
+    'Sempre conclua com a ideia de sequencia: educar, diagnosticar, acompanhar, consultar e so implementar quando o terreno estiver melhor preparado.',
+  ];
+  const deepDive = [
+    `Como leitura longa, este modulo precisa funcionar quase como um ensaio de posicionamento. ${item.title} nao e apenas sobre preferencia de formato de servico. E sobre onde o profissional quer ficar no mapa de valor do cliente: no lugar do fornecedor tatico ou no lugar da referencia que ajuda a organizar mudanca.`,
+    'Quando a proposta gira em torno da execucao, o cliente tende a consumir e cobrar. Ele aprende pouco, participa pouco da maturidade e mede valor principalmente pelo entregavel. Isso pode funcionar no curto prazo, mas costuma pressionar margem, aumentar desgaste e limitar profundidade de relacao.',
+    `Ja a habilitacao muda o jogo. Ela faz com que o profissional entre ensinando, esclarecendo e criando criterio. Em vez de apenas responder ao pedido imediato, ele melhora a qualidade do proprio pedido. E isso e um ganho enorme de posicionamento, porque quem melhora a pergunta do cliente deixa de ser apenas executor e passa a ser consultado como referencia.`,
+    `No final, o aluno precisa entender que ${item.title.toLowerCase()} e uma decisao sobre tipo de relacao, tipo de autoridade e tipo de futuro comercial que se quer construir. Esse e o modulo que fecha a trilha 1 com uma mensagem mais estrategica.`,
+  ];
+  const avoid = [
+    `Caricaturar a execucao como se ela nunca tivesse valor.`,
+    'Transformar habilitacao em discurso vago sem mostrar melhora concreta de posicionamento.',
+    'Falar de autoridade sem explicar o mecanismo real que a constrói.',
+  ];
+  const reflection = [
+    'Hoje eu entro mais como fornecedor ou como referencia?',
+    `Que parte da minha forma de vender ainda reforca o lado fraco que ${item.title.toLowerCase()} critica?`,
+    'O que mudaria no meu trabalho se eu priorizasse habilitacao antes de execucao?',
+  ];
+  const closing = `Memorize assim: ${item.title} e menos uma opiniao e mais uma escolha estrategica de posicionamento. ${keywords.slice(0, 3).join(', ')} definem o tipo de relacao que voce constrói.`;
+  return { opening, core, context, example, steps, deepDive, avoid, reflection, closing };
+}
+
+function getModuleStyle(moduleId) {
+  const defaultStyle = {
+    introTitle: 'Leitura de abertura',
+    finalTitle: 'Resumo final',
+    coreTitle: 'Conceito principal',
+    contextTitle: 'Leitura aprofundada',
+    exampleTitle: 'Exemplo orientado',
+    stepsTitle: 'Como ensinar ou aplicar este topico',
+    deepDiveTitle: 'Explicacao detalhada',
+    reflectionTitle: 'Perguntas de reflexao',
+    summaryTitle: 'Conceitos-chave para memorizar',
+    introBoxClass: 'bg-dark-800',
+    primaryBoxClass: '',
+    contextBoxClass: '',
+    exampleBoxClass: '',
+    stepsBoxClass: '',
+    deepDiveBoxClass: '',
+    reflectionBoxClass: '',
+    summaryBoxClass: '',
+  };
+
+  const styles = {
+    '1.2': {
+      ...defaultStyle,
+      introTitle: 'Tese de entrada',
+      finalTitle: 'Fechamento da tese',
+      coreTitle: 'Ponto de virada',
+      contextTitle: 'Implicacoes de negocio',
+      exampleTitle: 'Cena de sala ou cliente',
+      stepsTitle: 'Como conduzir essa ideia',
+      deepDiveTitle: 'Capitulo expandido',
+      reflectionTitle: 'Perguntas de maturidade',
+      summaryTitle: 'Frases-chave para sustentar a conversa',
+      introBoxClass: 'bg-dark-800 shadow-[inset_4px_0_0_0_rgba(250,204,21,0.5)]',
+      exampleBoxClass: 'ring-1 ring-primary/30',
+      deepDiveBoxClass: 'bg-gradient-to-br from-dark-800 to-dark-700/40',
+    },
+    '1.3': {
+      ...defaultStyle,
+      introTitle: 'Manifesto do modulo',
+      finalTitle: 'Essencia do modulo',
+      coreTitle: 'Centro da ideia',
+      contextTitle: 'Impacto humano e organizacional',
+      exampleTitle: 'Quadro de aplicacao',
+      stepsTitle: 'Como tornar isso concreto',
+      deepDiveTitle: 'Leitura longa',
+      reflectionTitle: 'Perguntas de criterio',
+      summaryTitle: 'Essencia para memorizar',
+      introBoxClass: 'bg-gradient-to-br from-dark-800 to-emerald-950/20',
+      primaryBoxClass: 'shadow-[0_0_0_1px_rgba(16,185,129,0.1)]',
+      contextBoxClass: 'ring-1 ring-blue-500/20',
+      summaryBoxClass: 'bg-gradient-to-br from-dark-800 to-dark-700/30',
+    },
+    '1.4': {
+      ...defaultStyle,
+      introTitle: 'Enquadramento estrategico',
+      finalTitle: 'Conclusao do confronto',
+      coreTitle: 'Tensao central',
+      contextTitle: 'Leitura de posicionamento',
+      exampleTitle: 'Comparacao aplicada',
+      stepsTitle: 'Como usar essa diferenca na pratica',
+      deepDiveTitle: 'Analise de fundo',
+      reflectionTitle: 'Perguntas de posicionamento',
+      summaryTitle: 'Argumentos para fixar',
+      introBoxClass: 'bg-dark-800 shadow-[inset_0_-4px_0_0_rgba(52,211,153,0.25)]',
+      primaryBoxClass: 'bg-gradient-to-br from-emerald-900/20 to-transparent',
+      stepsBoxClass: 'bg-gradient-to-br from-dark-800 to-emerald-950/10',
+      reflectionBoxClass: 'ring-1 ring-dark-600',
+    },
+  };
+
+  return styles[moduleId] || defaultStyle;
 }
 
 function getModuleNarrative(moduleId) {
@@ -855,7 +1062,28 @@ function getModuleNarrative(moduleId) {
         ],
         closing: 'Memorize assim: quem entende o novo contexto percebe que habilitar nao e uma etapa menor. E a resposta mais estrategica para um mercado em que o acesso se espalhou e a maturidade virou diferencial.',
       },
-    ],
+      ],
+    },
+    '1.2': {
+      intro: [
+        'O modulo 1.2 e onde a trilha deixa claro que ensino, no PHA 2030, nao e ponto final. Ele funciona como entrada relacional, como construcao de confianca e como mecanismo de preparacao para etapas mais profundas. Sem essa virada, a proposta pode ate soar interessante, mas continua presa ao formato de treinamento isolado.',
+        'Por isso, a leitura aqui precisa ser mais estrategica do que pedagogica no sentido estreito. O tema nao e apenas como ensinar melhor. O tema e como usar a capacitacao para organizar uma jornada de evolucao que comece com clareza e avance para diagnostico, acompanhamento, auditoria, consultoria e escala.',
+        'Visualmente e conceitualmente, este modulo deve soar como uma conversa de reposicionamento. Ele pega a energia aberta pelo contexto do mercado e mostra como a educacao se transforma em porta de entrada para um trabalho muito maior do que um encontro pontual.',
+      ],
+    },
+    '1.3': {
+      intro: [
+        'No modulo 1.3, a conversa fica mais identitaria. Depois de mostrar o contexto do mercado e a funcao estrategica da educacao, o curso precisa responder: afinal, o que o PHA 2030 faz de fato? A resposta aparece na ideia de Potencial Humano Aumentado.',
+        'Esse modulo nao deve soar como definicao institucional fria. Ele precisa ter densidade conceitual e calor humano ao mesmo tempo. A grande tarefa aqui e provar que a tecnologia so ganha valor duradouro quando amplia repertorio, criterio, autonomia e capacidade de decisao.',
+        'Se o modulo funcionar bem, o aluno passa a ter uma linguagem muito mais forte para se apresentar, vender, ensinar e conduzir conversas. Ele deixa de falar sobre ferramenta solta e passa a falar sobre ampliacao de capacidade de forma clara, elegante e estrategica.',
+      ],
+    },
+    '1.4': {
+      intro: [
+        'O modulo 1.4 fecha a trilha 1 como um confronto de posicionamento. Ele compara duas formas de entrar no mercado: uma centrada em execucao pura e outra centrada em habilitacao. Essa comparacao nao existe para demonizar a execucao, mas para mostrar por que ela ganha mais valor quando aparece depois de uma etapa de preparo, clareza e maturidade.',
+        'Aqui o texto precisa ser mais incisivo. O aluno deve sentir que esta escolhendo que tipo de profissional quer ser visto como no mercado: fornecedor que responde pedido imediato ou referencia que ajuda a reorganizar a pergunta, a prioridade e a direcao da empresa.',
+        'E por isso que este modulo pede outra energia visual e argumentativa. Ele funciona quase como fechamento de manifesto da trilha: depois de entender contexto, tese e conceito central, o aluno agora consegue ver qual tipo de posicionamento comercial e estrategico faz mais sentido sustentar.',
+      ],
     },
   };
 
