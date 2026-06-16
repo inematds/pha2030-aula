@@ -134,6 +134,14 @@
     /* Dark — bordas e divisorias suaves */
     .dark .border-dark-600 { border-color: #374151; }
     .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* Diagramas SVG futuristas — pulso + adaptacao ao tema claro */
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s}
+    }
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
@@ -232,6 +240,57 @@
             <span><span class="inema-meter-count" data-inema-meter-frac>0 de 6</span> · <span class="text-blue-400 font-semibold" data-inema-meter-pct>0%</span></span>
           </div>
           <div class="inema-bar"><div class="inema-bar__fill" data-inema-meter-fill></div></div>
+        </div>
+
+        <!-- SVG ilustrativo — os quatro perfis da sala (grade 2x2) -->
+        <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-8 overflow-hidden max-w-4xl">
+          <svg viewBox="0 0 760 360" class="w-full h-auto" role="img" aria-label="Os quatro perfis da sala dispostos em grade: ceticos, champions, iniciantes empolgados e sobrecarregados — cada um pede uma conducao diferente">
+            <defs>
+              <linearGradient id="m21-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/>
+              </linearGradient>
+              <filter id="m21-glow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <pattern id="m21-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                <circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/>
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="760" height="360" fill="url(#m21-grid)"/>
+            <!-- eixos: abertura (horizontal) x energia (vertical), so referencia leve -->
+            <g font-family="Inter,sans-serif" fill="#9ca3af" font-size="11" opacity="0.7">
+              <text x="380" y="22" text-anchor="middle">+ abertura a mudanca</text>
+              <text x="380" y="350" text-anchor="middle">- abertura a mudanca</text>
+            </g>
+            <!-- quadrante 1: Ceticos (resistencia) -->
+            <g font-family="Inter,sans-serif">
+              <rect x="56" y="200" width="300" height="118" rx="14" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+              <text x="78" y="236" fill="#bfe6ff" font-weight="600" font-size="18">Ceticos</text>
+              <text x="78" y="262" fill="#9ad6ff" font-size="12.5">resistencia, medo, defesa</text>
+              <text x="78" y="284" fill="#9ad6ff" font-size="12.5">conduzir sem confronto</text>
+            </g>
+            <!-- quadrante 2: Champions (caixa-foco com glow) -->
+            <g font-family="Inter,sans-serif">
+              <g filter="url(#m21-glow)"><rect x="404" y="42" width="300" height="118" rx="14" fill="#0e1622" stroke="url(#m21-grad)" stroke-width="2"/></g>
+              <text x="426" y="78" fill="#60a5fa" font-weight="600" font-size="18">Champions</text>
+              <text x="426" y="104" fill="#93c5fd" font-size="12.5">aliados, multiplicadores</text>
+              <text x="426" y="126" fill="#93c5fd" font-size="12.5">apoiam o avanco da sessao</text>
+            </g>
+            <!-- quadrante 3: Iniciantes empolgados -->
+            <g font-family="Inter,sans-serif">
+              <rect x="404" y="200" width="300" height="118" rx="14" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+              <text x="426" y="236" fill="#bfe6ff" font-weight="600" font-size="18">Iniciantes empolgados</text>
+              <text x="426" y="262" fill="#9ad6ff" font-size="12.5">curiosidade alta, estrutura baixa</text>
+              <text x="426" y="284" fill="#9ad6ff" font-size="12.5">dar vitorias rapidas</text>
+            </g>
+            <!-- quadrante 4: Sobrecarregados -->
+            <g font-family="Inter,sans-serif">
+              <rect x="56" y="42" width="300" height="118" rx="14" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+              <text x="78" y="78" fill="#bfe6ff" font-weight="600" font-size="18">Sobrecarregados</text>
+              <text x="78" y="104" fill="#9ad6ff" font-size="12.5">sabem que precisam aprender</text>
+              <text x="78" y="126" fill="#9ad6ff" font-size="12.5">querem direcao e proximo passo</text>
+            </g>
+          </svg>
         </div>
 
       <section id="topico-1" data-inema-topic="modulo-2-1#topico-1" class="mb-16">

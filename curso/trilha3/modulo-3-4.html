@@ -137,6 +137,15 @@
     /* Dark — bordas e divisorias suaves */
     .dark .border-dark-600 { border-color: #374151; }
     .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* Diagramas SVG futuristas — pulso + adaptacao ao tema claro */
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.25s} .wf-a:nth-child(3){animation-delay:.5s}
+      .wf-a:nth-child(4){animation-delay:.75s} .wf-a:nth-child(5){animation-delay:1s}
+    }
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
@@ -236,6 +245,35 @@
           </div>
           <div class="inema-bar"><div class="inema-bar__fill" data-inema-meter-fill></div></div>
         </div>
+
+      <div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-8 overflow-hidden max-w-4xl">
+        <svg viewBox="0 0 1000 240" class="w-full h-auto" role="img" aria-label="Aplicacao pratica: reflexao sobre o contexto e mini canvas convergem para uma proxima acao testavel e datada em 7 dias">
+          <defs>
+            <linearGradient id="m34-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c084fc"/><stop offset="1" stop-color="#a855f7"/></linearGradient>
+            <filter id="m34-glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <pattern id="m34-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#a855f7" opacity="0.12"/></pattern>
+            <marker id="m34-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#c084fc"/></marker>
+          </defs>
+          <rect x="0" y="0" width="1000" height="240" fill="url(#m34-grid)"/>
+          <g fill="none" stroke="#c084fc" stroke-width="2" opacity="0.6">
+            <path d="M256,80 C330,80 350,120 432,120" marker-end="url(#m34-ah)"/>
+            <path d="M256,160 C330,160 350,120 432,120" marker-end="url(#m34-ah)"/>
+            <path d="M664,120 L740,120" marker-end="url(#m34-ah)"/>
+          </g>
+          <g class="wf-a"><rect x="40" y="50" width="216" height="60" rx="13" fill="#1a1230" stroke="#c084fc" stroke-width="2"/></g>
+          <text x="148" y="76" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="600" font-size="16">Reflexao</text>
+          <text x="148" y="95" text-anchor="middle" fill="#e9d5ff" font-family="Inter,sans-serif" font-size="11.5">le dores e maturidade</text>
+          <g class="wf-a"><rect x="40" y="130" width="216" height="60" rx="13" fill="#1a1230" stroke="#c084fc" stroke-width="2"/></g>
+          <text x="148" y="156" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="600" font-size="16">Mini canvas</text>
+          <text x="148" y="175" text-anchor="middle" fill="#e9d5ff" font-family="Inter,sans-serif" font-size="11.5">ideia vira plano</text>
+          <g class="wf-a"><rect x="432" y="90" width="232" height="60" rx="13" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/></g>
+          <text x="548" y="116" text-anchor="middle" fill="#bfe6ff" font-family="Inter,sans-serif" font-weight="600" font-size="16">Realidade + oportunidade</text>
+          <text x="548" y="135" text-anchor="middle" fill="#9ad6ff" font-family="Inter,sans-serif" font-size="11.5">o que muda com IA</text>
+          <g filter="url(#m34-glow)"><rect x="740" y="84" width="220" height="72" rx="15" fill="#1a1230" stroke="url(#m34-grad)" stroke-width="2.5"/></g>
+          <text x="850" y="114" text-anchor="middle" fill="#c084fc" font-family="Inter,sans-serif" font-weight="700" font-size="17">Proxima acao</text>
+          <text x="850" y="136" text-anchor="middle" fill="#e9d5ff" font-family="Inter,sans-serif" font-size="12">testavel e datada · 7 dias</text>
+        </svg>
+      </div>
 
       <section id="topico-1" data-inema-topic="modulo-3-4#topico-1" class="mb-16">
         <div class="flex items-start justify-between gap-4 mb-6">

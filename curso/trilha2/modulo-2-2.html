@@ -134,6 +134,14 @@
     /* Dark — bordas e divisorias suaves */
     .dark .border-dark-600 { border-color: #374151; }
     .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* Diagramas SVG futuristas — pulso + adaptacao ao tema claro */
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s}
+    }
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
@@ -232,6 +240,54 @@
             <span><span class="inema-meter-count" data-inema-meter-frac>0 de 6</span> · <span class="text-blue-400 font-semibold" data-inema-meter-pct>0%</span></span>
           </div>
           <div class="inema-bar"><div class="inema-bar__fill" data-inema-meter-fill></div></div>
+        </div>
+
+        <!-- SVG ilustrativo — discovery antes da entrega (fluxo de decisao) -->
+        <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-8 overflow-hidden max-w-4xl">
+          <svg viewBox="0 0 880 300" class="w-full h-auto" role="img" aria-label="Fluxo de decisao: antes de montar slides, perguntar o nivel, a dor e o aha moment da sala; com discovery a entrega fica relevante, sem discovery a sessao fica generica">
+            <defs>
+              <linearGradient id="m22-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/>
+              </linearGradient>
+              <filter id="m22-glow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <pattern id="m22-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                <circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/>
+              </pattern>
+              <marker id="m22-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"/></marker>
+            </defs>
+            <rect x="0" y="0" width="880" height="300" fill="url(#m22-grid)"/>
+            <!-- caixa-pergunta (discovery) -->
+            <g font-family="Inter,sans-serif">
+              <rect x="40" y="108" width="210" height="84" rx="14" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+              <text x="145" y="140" text-anchor="middle" fill="#bfe6ff" font-weight="600" font-size="16">Fez discovery?</text>
+              <text x="145" y="162" text-anchor="middle" fill="#9ad6ff" font-size="11.5">nivel · dor · aha</text>
+              <text x="145" y="180" text-anchor="middle" fill="#9ad6ff" font-size="11.5">antes dos slides</text>
+            </g>
+            <!-- ramo SIM (verde) -->
+            <path d="M250,128 C320,108 350,70 420,70" fill="none" stroke="#34d399" stroke-width="1.8" opacity="0.7" marker-end="url(#m22-ah)"/>
+            <text x="330" y="86" text-anchor="middle" fill="#34d399" font-family="Inter,sans-serif" font-weight="600" font-size="13">sim</text>
+            <!-- ramo NAO (vermelho) -->
+            <path d="M250,172 C320,192 350,230 420,230" fill="none" stroke="#f87171" stroke-width="1.8" opacity="0.7" marker-end="url(#m22-ah)"/>
+            <text x="330" y="226" text-anchor="middle" fill="#f87171" font-family="Inter,sans-serif" font-weight="600" font-size="13">nao</text>
+            <!-- destino SIM: entrega relevante (caixa-foco com glow) -->
+            <g font-family="Inter,sans-serif">
+              <g filter="url(#m22-glow)"><rect x="424" y="34" width="300" height="72" rx="14" fill="#0e1622" stroke="url(#m22-grad)" stroke-width="2"/></g>
+              <text x="574" y="64" text-anchor="middle" fill="#60a5fa" font-weight="600" font-size="16">Entrega relevante</text>
+              <text x="574" y="86" text-anchor="middle" fill="#93c5fd" font-size="12">demo na dor certa · proximo passo</text>
+            </g>
+            <!-- destino NAO: sessao generica -->
+            <g font-family="Inter,sans-serif">
+              <rect x="424" y="196" width="300" height="72" rx="14" fill="#26201a" stroke="#9ca3af" stroke-width="2" opacity="0.85"/>
+              <text x="574" y="226" text-anchor="middle" fill="#e5e7eb" font-weight="600" font-size="16">Sessao generica</text>
+              <text x="574" y="248" text-anchor="middle" fill="#cbd5e1" font-size="12">bonita, porem irrelevante</text>
+            </g>
+            <!-- saidas do discovery -->
+            <path d="M724,70 C770,70 790,150 808,150" fill="none" stroke="#60a5fa" stroke-width="1.8" opacity="0.45"/>
+            <text x="812" y="140" fill="#60a5fa" font-family="Inter,sans-serif" font-size="11" opacity="0.8">hipotese</text>
+            <text x="812" y="156" fill="#60a5fa" font-family="Inter,sans-serif" font-size="11" opacity="0.8">de sessao</text>
+          </svg>
         </div>
 
       <section id="topico-1" data-inema-topic="modulo-2-2#topico-1" class="mb-16">

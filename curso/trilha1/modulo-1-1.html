@@ -137,6 +137,15 @@
     /* Dark — bordas e divisorias suaves */
     .dark .border-dark-600 { border-color: #374151; }
     .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* Diagramas SVG futuristas — pulso + adaptacao ao tema claro */
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.25s} .wf-a:nth-child(3){animation-delay:.5s}
+      .wf-a:nth-child(4){animation-delay:.75s} .wf-a:nth-child(5){animation-delay:1s}
+    }
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
@@ -243,7 +252,53 @@
             <p>Este modulo precisa funcionar como uma virada de chave. A maior parte das pessoas ainda chega ao tema da IA com uma leitura muito concentrada em ferramenta, novidade ou produtividade imediata. O PHA 2030 comeca em outro lugar: primeiro explicando o momento historico que estamos vivendo, depois mostrando por que o valor mais robusto ja nao esta apenas em construir com tecnologia, mas em preparar gente e organizacao para usar essa tecnologia com inteligencia, criterio e direcao.</p><p>Por isso, o modulo 1.1 nao deve soar como uma cronologia superficial do mercado. Ele precisa mostrar que cada onda da IA ampliou o acesso e, ao mesmo tempo, reduziu a vantagem competitiva de quem vende apenas a camada tecnica do momento. O argumento central e simples: quando o acesso se populariza, o diferencial deixa de ser acesso e passa a ser capacidade de uso, capacidade de adocao e capacidade de transformar aprendizagem em rotina.</p><p>Se essa base ficar clara, o restante do curso se organiza melhor. A tese da educacao como porta, a ideia de Potencial Humano Aumentado e o posicionamento de habilitacao em vez de execucao deixam de parecer slogans isolados e passam a ser consequencias naturais do novo contexto do mercado.</p>
           </div>
         </section>
-        
+
+        <!-- SVG: as ondas do mercado de IA (escada de maturidade) -->
+        <div class="rounded-2xl border border-emerald-500/30 bg-dark-900/40 p-3 sm:p-4 mb-8 overflow-hidden max-w-4xl">
+          <svg viewBox="0 0 1000 280" class="w-full h-auto" role="img" aria-label="Cada onda da IA sobe um degrau de acesso: prompts, depois GPTs e APIs, depois automacoes, depois agentes, ate a adocao enterprise; conforme o acesso se populariza, o diferencial migra do acesso para a capacidade de uso">
+            <defs>
+              <linearGradient id="m11-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#10b981"/>
+              </linearGradient>
+              <filter id="m11-glow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <pattern id="m11-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                <circle cx="1.3" cy="1.3" r="1.3" fill="#10b981" opacity="0.12"/>
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="1000" height="280" fill="url(#m11-grid)"/>
+            <!-- linha tracejada de maturidade -->
+            <path d="M110,214 L290,182 L470,150 L650,118 L838,84" fill="none" stroke="#34d399" stroke-width="1.8" stroke-dasharray="9 9" opacity="0.5"/>
+            <g font-family="Inter,sans-serif" font-size="14">
+              <!-- degrau 1 -->
+              <rect x="60" y="200" width="150" height="50" rx="12" fill="#0e2018" stroke="#34d399" stroke-width="2"/>
+              <text x="135" y="223" text-anchor="middle" fill="#34d399" font-weight="600">prompts</text>
+              <text x="135" y="240" text-anchor="middle" fill="#9ad6ff" font-size="11">acesso baixo</text>
+              <!-- degrau 2 -->
+              <rect x="240" y="168" width="150" height="50" rx="12" fill="#0e2018" stroke="#34d399" stroke-width="2"/>
+              <text x="315" y="191" text-anchor="middle" fill="#34d399" font-weight="600">GPTs / APIs</text>
+              <text x="315" y="208" text-anchor="middle" fill="#9ad6ff" font-size="11">mais acesso</text>
+              <!-- degrau 3 -->
+              <rect x="420" y="136" width="150" height="50" rx="12" fill="#0e2018" stroke="#34d399" stroke-width="2"/>
+              <text x="495" y="159" text-anchor="middle" fill="#34d399" font-weight="600">automacoes</text>
+              <text x="495" y="176" text-anchor="middle" fill="#9ad6ff" font-size="11">acesso amplo</text>
+              <!-- degrau 4 -->
+              <rect x="600" y="104" width="150" height="50" rx="12" fill="#0e2018" stroke="#34d399" stroke-width="2"/>
+              <text x="675" y="127" text-anchor="middle" fill="#34d399" font-weight="600">agentes</text>
+              <text x="675" y="144" text-anchor="middle" fill="#9ad6ff" font-size="11">commodity</text>
+            </g>
+            <!-- degrau 5: enterprise (foco com glow) -->
+            <g font-family="Inter,sans-serif" font-size="14" filter="url(#m11-glow)">
+              <rect x="788" y="62" width="164" height="54" rx="12" fill="#0e2018" stroke="url(#m11-grad)" stroke-width="2"/>
+              <text x="870" y="86" text-anchor="middle" fill="#34d399" font-weight="600">adocao enterprise</text>
+              <text x="870" y="104" text-anchor="middle" fill="#bfe6ff" font-size="11">capacidade de uso</text>
+            </g>
+            <!-- eixo do diferencial -->
+            <text x="60" y="40" fill="#bfe6ff" font-family="Inter,sans-serif" font-size="12.5" opacity="0.85">acesso se populariza  →  diferencial deixa de ser acesso e passa a ser capacidade</text>
+          </svg>
+        </div>
+
       <section id="topico-1" data-inema-topic="modulo-1-1#topico-1" class="mb-16">
         <div class="flex items-start justify-between gap-4 mb-6">
           <div class="flex items-start gap-4">

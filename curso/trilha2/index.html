@@ -129,6 +129,14 @@
     /* Dark — bordas e divisorias suaves */
     .dark .border-dark-600 { border-color: #374151; }
     .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+
+    /* Diagramas SVG futuristas — pulso + adaptacao ao tema claro */
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.3s} .wf-a:nth-child(3){animation-delay:.6s}
+    }
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
@@ -208,6 +216,64 @@
     </header>
   
       <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        <!-- HERO SVG — fluxo da trilha 2 -->
+        <div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 mb-8 overflow-hidden max-w-4xl">
+          <svg viewBox="0 0 1000 230" class="w-full h-auto" role="img" aria-label="Fluxo da trilha: ler os quatro perfis da sala, fazer discovery, criar o aha moment e estruturar a aula ate o resultado de uma sala que avanca">
+            <defs>
+              <linearGradient id="t2hero-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#3b82f6"/>
+              </linearGradient>
+              <filter id="t2hero-glow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <pattern id="t2hero-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                <circle cx="1.3" cy="1.3" r="1.3" fill="#3b82f6" opacity="0.12"/>
+              </pattern>
+              <marker id="t2hero-ah" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"/></marker>
+              <marker id="t2hero-ahc" markerWidth="9" markerHeight="9" refX="6.5" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"/></marker>
+            </defs>
+            <rect x="0" y="0" width="1000" height="230" fill="url(#t2hero-grid)"/>
+            <!-- conectores entre etapas -->
+            <g fill="none" stroke-width="1.8" opacity="0.55">
+              <path d="M214,115 L246,115" stroke="#38bdf8" marker-end="url(#t2hero-ahc)"/>
+              <path d="M450,115 L482,115" stroke="#38bdf8" marker-end="url(#t2hero-ahc)"/>
+              <path d="M686,115 L718,115" stroke="#38bdf8" marker-end="url(#t2hero-ahc)"/>
+            </g>
+            <!-- etapa 1: perfis -->
+            <g font-family="Inter,sans-serif">
+              <rect x="44" y="79" width="170" height="72" rx="14" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+              <text x="129" y="108" text-anchor="middle" fill="#bfe6ff" font-weight="600" font-size="17">Perfis</text>
+              <text x="129" y="130" text-anchor="middle" fill="#9ad6ff" font-size="11.5">ler a sala</text>
+            </g>
+            <!-- etapa 2: discovery -->
+            <g font-family="Inter,sans-serif">
+              <rect x="280" y="79" width="170" height="72" rx="14" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+              <text x="365" y="108" text-anchor="middle" fill="#bfe6ff" font-weight="600" font-size="17">Discovery</text>
+              <text x="365" y="130" text-anchor="middle" fill="#9ad6ff" font-size="11.5">perguntar antes</text>
+            </g>
+            <!-- etapa 3: aha moment -->
+            <g font-family="Inter,sans-serif">
+              <rect x="516" y="79" width="170" height="72" rx="14" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+              <text x="601" y="108" text-anchor="middle" fill="#bfe6ff" font-weight="600" font-size="17">Aha moment</text>
+              <text x="601" y="130" text-anchor="middle" fill="#9ad6ff" font-size="11.5">mostrar o valor</text>
+            </g>
+            <!-- etapa 4: estrutura -->
+            <g font-family="Inter,sans-serif">
+              <rect x="752" y="79" width="170" height="72" rx="14" fill="#0e1b26" stroke="#38bdf8" stroke-width="2"/>
+              <text x="837" y="108" text-anchor="middle" fill="#bfe6ff" font-weight="600" font-size="17">Estrutura</text>
+              <text x="837" y="130" text-anchor="middle" fill="#9ad6ff" font-size="11.5">conduzir a aula</text>
+            </g>
+            <!-- resultado em destaque (caixa-foco com glow) -->
+            <g filter="url(#t2hero-glow)">
+              <rect x="370" y="178" width="260" height="40" rx="12" fill="#0e1622" stroke="url(#t2hero-grad)" stroke-width="2"/>
+            </g>
+            <text x="500" y="203" text-anchor="middle" fill="#60a5fa" font-family="Inter,sans-serif" font-weight="600" font-size="15">sala que avanca</text>
+            <g fill="none" stroke="#60a5fa" stroke-width="1.8" opacity="0.45">
+              <path d="M837,151 C837,170 600,172 500,178" marker-end="url(#t2hero-ah)"/>
+            </g>
+          </svg>
+        </div>
 
         <!-- Medidor da trilha -->
         <div data-inema-meter="trilha:2" class="mb-12 bg-dark-800 border border-dark-600 rounded-xl p-4" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso da trilha Diagnostico e Conducao da Sala">
