@@ -3,13 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="inema-course" content="pha2030">
   <title>Modulo 3.2 | PHA 2030</title>
+
+  <!-- ANTI-FOUC: bloqueante, ANTES do Tailwind -->
+  <script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o){var r={};for(var x in o)r[x]=o[x];return r;}
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed === 'object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+      } catch(e){ p = clone(DEF); }
+      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'},'claro':{dark:false,attr:null,cs:'light'},'sepia':{dark:false,attr:'sepia',cs:'light'},'foco':{dark:null,attr:'foco',cs:null},'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark===true) html.classList.add('dark'); else if (t.dark===false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter');
+      html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style, scale = (+p.fontScale||100);
+      s.setProperty('--inema-font-scale', (scale/100).toString());
+      s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth||68) + 'ch');
+      s.setProperty('--lh-body', (+p.leading||1.7).toString());
+      var fam = p.font==='system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font==='leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald:[152,76,45], blue:[217,91,60], purple:[258,90,66], amber:[38,92,50], teal:[174,72,41], rose:[350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0]+''); s.setProperty('--accent-s', a[1]+'%'); s.setProperty('--accent-l', a[2]+'%');
+      s.setProperty('--accent', 'hsl(' + a[0] + ' ' + a[1] + '% ' + a[2] + '%)');
+    } catch(err){ try{ document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; }catch(e){} }
+  })();
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           colors: {
@@ -26,10 +64,41 @@
       }
     };
   </script>
+  <link rel="stylesheet" href="../../assets/learn.css">
+
+  <!-- Manifesto do curso (IDENTICO em todas as paginas) -->
+  <script type="application/json" data-inema-manifest>
+  {
+    "course": "pha2030",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos do PHA 2030", "modules": [
+        { "id": "1-1", "title": "O momento do mercado de IA", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "Educação como porta de entrada", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" },
+        { "id": "1-3", "title": "Potencial Humano Aumentado", "topics": 6, "href": "curso/trilha1/modulo-1-3.html" },
+        { "id": "1-4", "title": "Por que habilitar vale mais que executar", "topics": 6, "href": "curso/trilha1/modulo-1-4.html" }
+      ]},
+      { "n": "2", "title": "Diagnóstico e Condução da Sala", "modules": [
+        { "id": "2-1", "title": "Os quatro perfis da sala", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "Discovery antes da entrega", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" },
+        { "id": "2-3", "title": "Como criar o aha moment", "topics": 6, "href": "curso/trilha2/modulo-2-3.html" },
+        { "id": "2-4", "title": "Estrutura de aula e workshop", "topics": 6, "href": "curso/trilha2/modulo-2-4.html" }
+      ]},
+      { "n": "3", "title": "Jornada de Transformação e Oferta", "modules": [
+        { "id": "3-1", "title": "Awareness até Scale", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "O treinamento como entrada relacional", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "Do workshop à consultoria aplicada", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" },
+        { "id": "3-4", "title": "Aplicação prática e próximo passo", "topics": 6, "href": "curso/trilha3/modulo-3-4.html" }
+      ]}
+    ]
+  }
+  </script>
+
   <style>
     body { font-family: 'Inter', sans-serif; }
     .topic-explanation.hidden { display: none; }
     .topic-explanation { display: block; }
+    html { scroll-behavior: smooth; }
+    [id] { scroll-margin-top: 5rem; }
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
     html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
@@ -56,6 +125,18 @@
     html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
     html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
     html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+
+    /* Light mode — acentos blue/primary/red das caixas do modulo */
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .text-red-400 { color: #dc2626; }
+    html:not(.dark) .bg-red-500\/10 { background-color: rgba(220,38,38,0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(220,38,38,0.25); }
+
+    /* Dark — bordas e divisorias suaves */
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
   </style>
 </head>
 <body class="bg-dark-900 text-neutral-100 min-h-screen">
@@ -73,6 +154,18 @@
           </div>
           <div class="flex items-center space-x-1 sm:space-x-2">
             <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos do PHA 2030</span></a><a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Diagnostico e Conducao da Sala</span></a><a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Jornada de Transformacao e Oferta</span></a>
+            <button type="button" data-inema-journey-open class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 transition-colors text-sm ml-1" title="Minha jornada"><span aria-hidden="true">◷</span><span class="hidden lg:inline">Jornada</span><span class="inema-journey-badge hidden" data-inema-journey-badge data-count="0"></span></button>
+            <div class="relative">
+              <button type="button" data-inema-appearance-toggle="[data-inema-appearance]" aria-expanded="false" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" title="Aparencia e leitura"><span aria-hidden="true">◑</span></button>
+              <div data-inema-appearance class="inema-appearance-pop">
+                <div class="inema-segment"><button data-inema-set-theme="inema-dark">Escuro</button><button data-inema-set-theme="claro">Claro</button><button data-inema-set-theme="sepia">Sépia</button><button data-inema-set-theme="foco">Foco</button><button data-inema-set-theme="contraste">Alto contraste</button></div>
+                <div class="inema-segment"><button data-inema-set-font="inter">Inter</button><button data-inema-set-font="system">Sistema</button><button data-inema-set-font="leitura">Leitura</button></div>
+                <div class="inema-segment"><button data-inema-set-fontscale="100">A</button><button data-inema-set-fontscale="112">A+</button><button data-inema-set-fontscale="125">A++</button></div>
+                <div class="inema-segment"><button data-inema-set-linewidth="60">Estreito</button><button data-inema-set-linewidth="68">Médio</button><button data-inema-set-linewidth="75">Largo</button></div>
+                <div class="inema-segment"><button data-inema-set-leading="1.45">Compacto</button><button data-inema-set-leading="1.7">Confortável</button></div>
+                <div class="inema-accent-grid"><button data-inema-set-accent="emerald"></button><button data-inema-set-accent="blue"></button><button data-inema-set-accent="purple"></button><button data-inema-set-accent="amber"></button><button data-inema-set-accent="teal"></button><button data-inema-set-accent="rose"></button></div>
+              </div>
+            </div>
             <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
               <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -131,22 +224,35 @@
         </div>
       </header>
 
-      <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        
-        
-      <section id="topico-1" class="mb-16">
-        <div class="flex items-start gap-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
-          <div>
-            <h2 class="text-2xl font-bold mb-2">Aula nao e produto final</h2>
-            <p class="text-neutral-400">Entrada e nao destino. No PHA 2030, a aula inicia a relacao e cria base para desdobramentos. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+      <main id="conteudo" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="lg:grid lg:grid-cols-[1fr_240px] lg:gap-10">
+          <div class="inema-prose">
+
+        <!-- Medidor do modulo -->
+        <div data-inema-meter="modulo:3-2" class="inema-bar-wrap mb-10 bg-dark-800 border border-dark-600 rounded-xl p-4" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do modulo 3.2">
+          <div class="flex items-center justify-between mb-2 text-sm">
+            <span class="text-neutral-400">Seu progresso neste módulo</span>
+            <span><span class="inema-meter-count" data-inema-meter-frac>0 de 6</span> · <span class="text-purple-400 font-semibold" data-inema-meter-pct>0%</span></span>
           </div>
+          <div class="inema-bar"><div class="inema-bar__fill" data-inema-meter-fill></div></div>
+        </div>
+
+      <section id="topico-1" data-inema-topic="modulo-3-2#topico-1" class="mb-16">
+        <div class="flex items-start justify-between gap-4 mb-6">
+          <div class="flex items-start gap-4">
+            <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">1</span>
+            <div>
+              <h2 class="text-2xl font-bold mb-2">Aula nao e produto final</h2>
+              <p class="text-neutral-400">Entrada e nao destino. No PHA 2030, a aula inicia a relacao e cria base para desdobramentos. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+            </div>
+          </div>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm flex-shrink-0"><span aria-hidden="true">?</span><span>Dúvida</span></button>
         </div>
 
         <div class="space-y-6">
           <div class=" rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-transparent p-6">
             <h3 class="text-lg font-semibold text-purple-400 mb-2">Conceito principal</h3>
-            <p class="text-neutral-300 mb-4">No PHA 2030, a aula inicia a relacao e cria base para desdobramentos. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
+            <p data-inema-block="m3-2-t1-p1" class="text-neutral-300 mb-4">No PHA 2030, a aula inicia a relacao e cria base para desdobramentos. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
             <p class="text-neutral-300">Quando o aluno entende aula nao e produto final com profundidade, ele deixa de repetir frases de efeito e passa a enxergar onde esse assunto aparece no cotidiano de pessoas, equipes e liderancas.</p>
           </div>
 
@@ -177,8 +283,8 @@
           </div>
 
           <div class="grid md:grid-cols-2 gap-6">
-            <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6">
-              <h3 class="text-lg font-semibold text-emerald-400 mb-3">Fazer</h3>
+            <div class="rounded-2xl border border-purple-500/30 bg-purple-500/10 p-6">
+              <h3 class="text-lg font-semibold text-purple-400 mb-3">Fazer</h3>
               <ul class="space-y-2 text-neutral-300">
                 <li>Conectar o tema a dores reconheciveis.</li>
                 <li>Usar linguagem clara e operacional.</li>
@@ -205,22 +311,32 @@
             <p class="text-neutral-300 mb-4">entrada, relacao, desdobramento, base, potencial</p>
             <p class="text-neutral-300">Memorize este ponto assim: Aula nao e produto final so ganha valor completo quando sai do resumo e entra na explicacao. O objetivo do modulo nao e apenas informar, mas dar repertorio suficiente para analisar, ensinar e aplicar o tema com seguranca.</p>
           </div>
+
+          <div class="flex justify-start mt-2">
+            <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+              <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span>
+              <span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+            </button>
+          </div>
         </div>
       </section>
     
-      <section id="topico-2" class="mb-16">
-        <div class="flex items-start gap-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
-          <div>
-            <h2 class="text-2xl font-bold mb-2">Reducao de friccao comercial</h2>
-            <p class="text-neutral-400">Comecar leve para aprofundar melhor. Uma primeira experiencia bem desenhada reduz barreiras e aumenta confianca. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+      <section id="topico-2" data-inema-topic="modulo-3-2#topico-2" class="mb-16">
+        <div class="flex items-start justify-between gap-4 mb-6">
+          <div class="flex items-start gap-4">
+            <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">2</span>
+            <div>
+              <h2 class="text-2xl font-bold mb-2">Reducao de friccao comercial</h2>
+              <p class="text-neutral-400">Comecar leve para aprofundar melhor. Uma primeira experiencia bem desenhada reduz barreiras e aumenta confianca. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+            </div>
           </div>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm flex-shrink-0"><span aria-hidden="true">?</span><span>Dúvida</span></button>
         </div>
 
         <div class="space-y-6">
           <div class=" rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-transparent p-6">
             <h3 class="text-lg font-semibold text-purple-400 mb-2">Conceito principal</h3>
-            <p class="text-neutral-300 mb-4">Uma primeira experiencia bem desenhada reduz barreiras e aumenta confianca. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
+            <p data-inema-block="m3-2-t2-p1" class="text-neutral-300 mb-4">Uma primeira experiencia bem desenhada reduz barreiras e aumenta confianca. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
             <p class="text-neutral-300">Quando o aluno entende reducao de friccao comercial com profundidade, ele deixa de repetir frases de efeito e passa a enxergar onde esse assunto aparece no cotidiano de pessoas, equipes e liderancas.</p>
           </div>
 
@@ -251,8 +367,8 @@
           </div>
 
           <div class="grid md:grid-cols-2 gap-6">
-            <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6">
-              <h3 class="text-lg font-semibold text-emerald-400 mb-3">Fazer</h3>
+            <div class="rounded-2xl border border-purple-500/30 bg-purple-500/10 p-6">
+              <h3 class="text-lg font-semibold text-purple-400 mb-3">Fazer</h3>
               <ul class="space-y-2 text-neutral-300">
                 <li>Conectar o tema a dores reconheciveis.</li>
                 <li>Usar linguagem clara e operacional.</li>
@@ -279,22 +395,32 @@
             <p class="text-neutral-300 mb-4">friccao, confianca, barreiras, diagnostico, acompanhamento</p>
             <p class="text-neutral-300">Memorize este ponto assim: Reducao de friccao comercial so ganha valor completo quando sai do resumo e entra na explicacao. O objetivo do modulo nao e apenas informar, mas dar repertorio suficiente para analisar, ensinar e aplicar o tema com seguranca.</p>
           </div>
+
+          <div class="flex justify-start mt-2">
+            <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+              <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span>
+              <span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+            </button>
+          </div>
         </div>
       </section>
     
-      <section id="topico-3" class="mb-16">
-        <div class="flex items-start gap-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
-          <div>
-            <h2 class="text-2xl font-bold mb-2">Linguagem compartilhada</h2>
-            <p class="text-neutral-400">A turma aprende a nomear o problema. Treinamentos estruturados criam vocabulario comum entre lideranca e operacao. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+      <section id="topico-3" data-inema-topic="modulo-3-2#topico-3" class="mb-16">
+        <div class="flex items-start justify-between gap-4 mb-6">
+          <div class="flex items-start gap-4">
+            <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">3</span>
+            <div>
+              <h2 class="text-2xl font-bold mb-2">Linguagem compartilhada</h2>
+              <p class="text-neutral-400">A turma aprende a nomear o problema. Treinamentos estruturados criam vocabulario comum entre lideranca e operacao. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+            </div>
           </div>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm flex-shrink-0"><span aria-hidden="true">?</span><span>Dúvida</span></button>
         </div>
 
         <div class="space-y-6">
           <div class=" rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-transparent p-6">
             <h3 class="text-lg font-semibold text-purple-400 mb-2">Conceito principal</h3>
-            <p class="text-neutral-300 mb-4">Treinamentos estruturados criam vocabulario comum entre lideranca e operacao. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
+            <p data-inema-block="m3-2-t3-p1" class="text-neutral-300 mb-4">Treinamentos estruturados criam vocabulario comum entre lideranca e operacao. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
             <p class="text-neutral-300">Quando o aluno entende linguagem compartilhada com profundidade, ele deixa de repetir frases de efeito e passa a enxergar onde esse assunto aparece no cotidiano de pessoas, equipes e liderancas.</p>
           </div>
 
@@ -325,8 +451,8 @@
           </div>
 
           <div class="grid md:grid-cols-2 gap-6">
-            <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6">
-              <h3 class="text-lg font-semibold text-emerald-400 mb-3">Fazer</h3>
+            <div class="rounded-2xl border border-purple-500/30 bg-purple-500/10 p-6">
+              <h3 class="text-lg font-semibold text-purple-400 mb-3">Fazer</h3>
               <ul class="space-y-2 text-neutral-300">
                 <li>Conectar o tema a dores reconheciveis.</li>
                 <li>Usar linguagem clara e operacional.</li>
@@ -353,22 +479,32 @@
             <p class="text-neutral-300 mb-4">linguagem, vocabulario, clareza, decisoes, alinhamento</p>
             <p class="text-neutral-300">Memorize este ponto assim: Linguagem compartilhada so ganha valor completo quando sai do resumo e entra na explicacao. O objetivo do modulo nao e apenas informar, mas dar repertorio suficiente para analisar, ensinar e aplicar o tema com seguranca.</p>
           </div>
+
+          <div class="flex justify-start mt-2">
+            <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+              <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span>
+              <span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+            </button>
+          </div>
         </div>
       </section>
     
-      <section id="topico-4" class="mb-16">
-        <div class="flex items-start gap-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
-          <div>
-            <h2 class="text-2xl font-bold mb-2">Sinalizacao de maturidade</h2>
-            <p class="text-neutral-400">Quem esta pronto para aprofundar. A primeira entrega ajuda a identificar interesse, resistencia e prontidao. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+      <section id="topico-4" data-inema-topic="modulo-3-2#topico-4" class="mb-16">
+        <div class="flex items-start justify-between gap-4 mb-6">
+          <div class="flex items-start gap-4">
+            <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">4</span>
+            <div>
+              <h2 class="text-2xl font-bold mb-2">Sinalizacao de maturidade</h2>
+              <p class="text-neutral-400">Quem esta pronto para aprofundar. A primeira entrega ajuda a identificar interesse, resistencia e prontidao. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+            </div>
           </div>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm flex-shrink-0"><span aria-hidden="true">?</span><span>Dúvida</span></button>
         </div>
 
         <div class="space-y-6">
           <div class=" rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-transparent p-6">
             <h3 class="text-lg font-semibold text-purple-400 mb-2">Conceito principal</h3>
-            <p class="text-neutral-300 mb-4">A primeira entrega ajuda a identificar interesse, resistencia e prontidao. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
+            <p data-inema-block="m3-2-t4-p1" class="text-neutral-300 mb-4">A primeira entrega ajuda a identificar interesse, resistencia e prontidao. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
             <p class="text-neutral-300">Quando o aluno entende sinalizacao de maturidade com profundidade, ele deixa de repetir frases de efeito e passa a enxergar onde esse assunto aparece no cotidiano de pessoas, equipes e liderancas.</p>
           </div>
 
@@ -399,8 +535,8 @@
           </div>
 
           <div class="grid md:grid-cols-2 gap-6">
-            <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6">
-              <h3 class="text-lg font-semibold text-emerald-400 mb-3">Fazer</h3>
+            <div class="rounded-2xl border border-purple-500/30 bg-purple-500/10 p-6">
+              <h3 class="text-lg font-semibold text-purple-400 mb-3">Fazer</h3>
               <ul class="space-y-2 text-neutral-300">
                 <li>Conectar o tema a dores reconheciveis.</li>
                 <li>Usar linguagem clara e operacional.</li>
@@ -427,22 +563,32 @@
             <p class="text-neutral-300 mb-4">prontidao, interesse, resistencia, oferta, leitura</p>
             <p class="text-neutral-300">Memorize este ponto assim: Sinalizacao de maturidade so ganha valor completo quando sai do resumo e entra na explicacao. O objetivo do modulo nao e apenas informar, mas dar repertorio suficiente para analisar, ensinar e aplicar o tema com seguranca.</p>
           </div>
+
+          <div class="flex justify-start mt-2">
+            <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+              <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span>
+              <span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+            </button>
+          </div>
         </div>
       </section>
     
-      <section id="topico-5" class="mb-16">
-        <div class="flex items-start gap-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
-          <div>
-            <h2 class="text-2xl font-bold mb-2">Confianca como ativo</h2>
-            <p class="text-neutral-400">Autoridade nasce de utilidade percebida. Confianca se acumula quando a experiencia gera clareza e valor reconhecido. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+      <section id="topico-5" data-inema-topic="modulo-3-2#topico-5" class="mb-16">
+        <div class="flex items-start justify-between gap-4 mb-6">
+          <div class="flex items-start gap-4">
+            <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">5</span>
+            <div>
+              <h2 class="text-2xl font-bold mb-2">Confianca como ativo</h2>
+              <p class="text-neutral-400">Autoridade nasce de utilidade percebida. Confianca se acumula quando a experiencia gera clareza e valor reconhecido. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+            </div>
           </div>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm flex-shrink-0"><span aria-hidden="true">?</span><span>Dúvida</span></button>
         </div>
 
         <div class="space-y-6">
           <div class=" rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-transparent p-6">
             <h3 class="text-lg font-semibold text-purple-400 mb-2">Conceito principal</h3>
-            <p class="text-neutral-300 mb-4">Confianca se acumula quando a experiencia gera clareza e valor reconhecido. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
+            <p data-inema-block="m3-2-t5-p1" class="text-neutral-300 mb-4">Confianca se acumula quando a experiencia gera clareza e valor reconhecido. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
             <p class="text-neutral-300">Quando o aluno entende confianca como ativo com profundidade, ele deixa de repetir frases de efeito e passa a enxergar onde esse assunto aparece no cotidiano de pessoas, equipes e liderancas.</p>
           </div>
 
@@ -473,8 +619,8 @@
           </div>
 
           <div class="grid md:grid-cols-2 gap-6">
-            <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6">
-              <h3 class="text-lg font-semibold text-emerald-400 mb-3">Fazer</h3>
+            <div class="rounded-2xl border border-purple-500/30 bg-purple-500/10 p-6">
+              <h3 class="text-lg font-semibold text-purple-400 mb-3">Fazer</h3>
               <ul class="space-y-2 text-neutral-300">
                 <li>Conectar o tema a dores reconheciveis.</li>
                 <li>Usar linguagem clara e operacional.</li>
@@ -501,22 +647,32 @@
             <p class="text-neutral-300 mb-4">confianca, autoridade, valor, parceiro, posicionamento</p>
             <p class="text-neutral-300">Memorize este ponto assim: Confianca como ativo so ganha valor completo quando sai do resumo e entra na explicacao. O objetivo do modulo nao e apenas informar, mas dar repertorio suficiente para analisar, ensinar e aplicar o tema com seguranca.</p>
           </div>
+
+          <div class="flex justify-start mt-2">
+            <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+              <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span>
+              <span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+            </button>
+          </div>
         </div>
       </section>
     
-      <section id="topico-6" class="mb-16">
-        <div class="flex items-start gap-4 mb-6">
-          <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
-          <div>
-            <h2 class="text-2xl font-bold mb-2">Encadeamento da jornada</h2>
-            <p class="text-neutral-400">Workshop, diagnostico, trilha e acompanhamento. A entrada relacional so faz sentido quando existe um fluxo coerente apos a sessao. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+      <section id="topico-6" data-inema-topic="modulo-3-2#topico-6" class="mb-16">
+        <div class="flex items-start justify-between gap-4 mb-6">
+          <div class="flex items-start gap-4">
+            <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl flex-shrink-0">6</span>
+            <div>
+              <h2 class="text-2xl font-bold mb-2">Encadeamento da jornada</h2>
+              <p class="text-neutral-400">Workshop, diagnostico, trilha e acompanhamento. A entrada relacional so faz sentido quando existe um fluxo coerente apos a sessao. Neste modulo, o foco e transformar esse conceito em criterio pratico para desenhar jornadas de transformacao e continuidade com mais maturidade.</p>
+            </div>
           </div>
+          <button type="button" data-inema-doubt-toggle aria-pressed="false" title="Marcar dúvida neste tópico" class="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm flex-shrink-0"><span aria-hidden="true">?</span><span>Dúvida</span></button>
         </div>
 
         <div class="space-y-6">
           <div class=" rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-transparent p-6">
             <h3 class="text-lg font-semibold text-purple-400 mb-2">Conceito principal</h3>
-            <p class="text-neutral-300 mb-4">A entrada relacional so faz sentido quando existe um fluxo coerente apos a sessao. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
+            <p data-inema-block="m3-2-t6-p1" class="text-neutral-300 mb-4">A entrada relacional so faz sentido quando existe um fluxo coerente apos a sessao. Em termos de curso, isso significa sair da definicao rapida e explicar como o tema afeta comportamento, leitura de contexto e qualidade de decisao.</p>
             <p class="text-neutral-300">Quando o aluno entende encadeamento da jornada com profundidade, ele deixa de repetir frases de efeito e passa a enxergar onde esse assunto aparece no cotidiano de pessoas, equipes e liderancas.</p>
           </div>
 
@@ -547,8 +703,8 @@
           </div>
 
           <div class="grid md:grid-cols-2 gap-6">
-            <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-6">
-              <h3 class="text-lg font-semibold text-emerald-400 mb-3">Fazer</h3>
+            <div class="rounded-2xl border border-purple-500/30 bg-purple-500/10 p-6">
+              <h3 class="text-lg font-semibold text-purple-400 mb-3">Fazer</h3>
               <ul class="space-y-2 text-neutral-300">
                 <li>Conectar o tema a dores reconheciveis.</li>
                 <li>Usar linguagem clara e operacional.</li>
@@ -575,9 +731,16 @@
             <p class="text-neutral-300 mb-4">workshop, diagnostico, trilha, acompanhamento, recorrencia</p>
             <p class="text-neutral-300">Memorize este ponto assim: Encadeamento da jornada so ganha valor completo quando sai do resumo e entra na explicacao. O objetivo do modulo nao e apenas informar, mas dar repertorio suficiente para analisar, ensinar e aplicar o tema com seguranca.</p>
           </div>
+
+          <div class="flex justify-start mt-2">
+            <button type="button" data-inema-read-toggle aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors">
+              <span class="inema-ico-todo" aria-hidden="true">○</span><span class="inema-ico-done" aria-hidden="true">●</span>
+              <span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido</span>
+            </button>
+          </div>
         </div>
       </section>
-    
+
 
         <section class="rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-transparent p-8">
           <h2 class="text-2xl font-bold mb-4">Resumo final</h2>
@@ -590,6 +753,24 @@
             <a href="modulo-3-3.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Proximo Modulo</a>
           </div>
         </section>
+
+          </div>
+
+          <!-- TOC -->
+          <aside>
+            <nav data-inema-toc aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start">
+              <p class="text-sm text-neutral-400 mb-3">Seção <span data-inema-section-counter>1 de 6</span></p>
+              <ol class="space-y-1 text-sm">
+                <li><a href="#topico-1" class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400">1. Aula não é produto final</a></li>
+                <li><a href="#topico-2" class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400">2. Redução de fricção comercial</a></li>
+                <li><a href="#topico-3" class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400">3. Linguagem compartilhada</a></li>
+                <li><a href="#topico-4" class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400">4. Sinalização de maturidade</a></li>
+                <li><a href="#topico-5" class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400">5. Confiança como ativo</a></li>
+                <li><a href="#topico-6" class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400">6. Encadeamento da jornada</a></li>
+              </ol>
+            </nav>
+          </aside>
+        </div>
       </main>
     
   <footer class="border-t border-dark-600 py-8 mt-10">
@@ -636,15 +817,18 @@
       themeToggleDarkIcon.classList.toggle('hidden', !isDark());
       themeToggleLightIcon.classList.toggle('hidden', isDark());
     };
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') document.documentElement.classList.remove('dark');
-    if (savedTheme === 'dark') document.documentElement.classList.add('dark');
     syncIcons();
     themeToggleBtn.addEventListener('click', () => {
       document.documentElement.classList.toggle('dark');
+      document.documentElement.style.colorScheme = isDark() ? 'dark' : 'light';
       localStorage.setItem('theme', isDark() ? 'dark' : 'light');
+      try { if (window.INEMA && INEMA.setPref) INEMA.setPref('theme', isDark() ? 'inema-dark' : 'claro'); } catch (e) {}
       syncIcons();
     });
   </script>
+
+  <!-- CAMADA DE APRENDIZAGEM -->
+  <script src="../../assets/learn.js"></script>
+  <script>if (window.INEMA && typeof window.INEMA.init === 'function') { window.INEMA.init(); }</script>
 </body>
 </html>
