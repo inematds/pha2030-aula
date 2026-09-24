@@ -43,3 +43,10 @@ Os materiais centrais usados na estruturacao do curso estao em `doc/`, com desta
 - `doc/workshop-2h.md`
 - `doc/slides.md`
 
+<!-- inema-backlink:v1 -->
+## Mais no INEMA.CLUB
+
+- [Ficha completa deste curso](https://www.inema.club/cursos/50-pha-2030-da-capacitacao-a-transformacao/)
+- [Guia: como aprender inteligência artificial](https://www.inema.club/aprender-inteligencia-artificial/)
+- [Todos os cursos](https://www.inema.club/cursos/)
+<!-- /inema-backlink:v1 -->
